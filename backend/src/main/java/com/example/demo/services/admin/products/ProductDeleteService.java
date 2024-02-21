@@ -69,9 +69,15 @@ public class ProductDeleteService {
         .where(CUSTOMER_CART_CONFIGURABLE_ITEMS.PRODUCT_VARIANT_ID.in(productVariants))
         .execute();
 
-    ctx.deleteFrom(PRODUCT_VARIANTS).where(PRODUCT_VARIANTS.ID.eq(productId)).execute();
+    ctx.deleteFrom(PRODUCT_VARIANTS).where(PRODUCT_VARIANTS.PRODUCT_ID.eq(productId)).execute();
 
     ctx.deleteFrom(PRODUCT_TAXONS).where(PRODUCT_TAXONS.PRODUCT_ID.eq(productId)).execute();
+
+    ctx.deleteFrom(PRODUCT_CONFIGURABLE_OPTIONS)
+        .where(PRODUCT_CONFIGURABLE_OPTIONS.PRODUCT_ID.eq(productId))
+        .execute();
+
+    ctx.deleteFrom(PRODUCT_REVIEWS).where(PRODUCT_REVIEWS.PRODUCT_ID.eq(productId)).execute();
 
     String productImageKey =
         ctx.deleteFrom(PRODUCTS)

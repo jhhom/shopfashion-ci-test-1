@@ -34,7 +34,7 @@ export function useLogin() {
       if (err.type == "application") {
         if (err.error.details.code === "RESOURCE_NOT_FOUND") {
           toast.error("Incorrect email address");
-        } else if (err.error.details.code === "AUTH.INCORRECT_PASSWORD") {
+        } else if (err.error.details.code === "AUTH_INCORRECT_PASSWORD") {
           toast.error("Incorrect password");
         } else {
           toast.error("Failed to login, an unexpected had occured");

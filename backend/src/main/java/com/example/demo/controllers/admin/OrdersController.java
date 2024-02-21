@@ -72,7 +72,7 @@ public class OrdersController {
     }
   }
 
-  @PutMapping()
+  @PutMapping("{orderId}/cancel")
   public ResultMessage cancelOrder(@PathVariable Integer orderId) {
     var result = orderCommandService.cancelOrder(orderId);
     return result;

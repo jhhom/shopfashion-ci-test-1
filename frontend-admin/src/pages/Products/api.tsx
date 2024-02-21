@@ -189,7 +189,7 @@ export function useCreateProductVariant({
 
       const message =
         err.type === "application" &&
-        err.error.details.code === "PRODUCT_VARIANT.CONFLICT_OPTION_VALUES"
+        err.error.details.code === "PRODUCT_VARIANT_CONFLICT_OPTION_VALUES"
           ? err.error.message
           : "An unexpected error had occured";
 
@@ -336,7 +336,7 @@ export function useEditProductVariant({
       const err = parseApiError(e);
       const message =
         err.type === "application" &&
-        err.error.details.code === "PRODUCT_VARIANT.CONFLICT_OPTION_VALUES"
+        err.error.details.code === "PRODUCT_VARIANT_CONFLICT_OPTION_VALUES"
           ? `Unable to create product variant. Another variant "${err.error.details.info.variant}" has the same set of options`
           : "An unexpected error had occured";
 
@@ -625,7 +625,7 @@ const generateProductVariantApiErrorMessage = (
   const e = parseApiError(generateProductVariantApiError);
   if (e.type === "application") {
     if (
-      e.error.details.code === "PRODUCT_VARIANT.MULTI_CONFLICT_OPTION_VALUES"
+      e.error.details.code === "PRODUCT_VARIANT_MULTI_CONFLICT_OPTION_VALUES"
     ) {
       return (
         <div>
@@ -641,7 +641,7 @@ const generateProductVariantApiErrorMessage = (
         </div>
       );
     }
-    if (e.error.details.code === "PRODUCT_VARIANT.CONFLICT_VARIANT_NAMES") {
+    if (e.error.details.code === "PRODUCT_VARIANT_CONFLICT_VARIANT_NAMES") {
       return `Unable to save product variants, the variant names ${e.error.details.info.names.join(
         ", "
       )} are used multiple times.`;

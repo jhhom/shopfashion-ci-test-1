@@ -8,7 +8,6 @@ import com.example.demo.jooqmodels.enums.ProductType;
 import com.example.demo.services.common.MediaService;
 import com.example.demo.services.common.Pagination;
 import com.example.demo.services.common.Pagination.PaginationMeta;
-
 import java.math.BigDecimal;
 import java.util.List;
 import org.jooq.DSLContext;
@@ -108,7 +107,7 @@ public class AdminProductQueryService {
             .on(PRODUCTS.ID.eq(PRODUCT_TAXONS.PRODUCT_ID));
 
     var countQuery =
-        ctx.select(count(PRODUCTS.ID))
+        ctx.select(countDistinct(PRODUCTS.ID))
             .from(PRODUCTS)
             .leftJoin(PRODUCT_TAXONS)
             .on(PRODUCTS.ID.eq(PRODUCT_TAXONS.PRODUCT_ID));

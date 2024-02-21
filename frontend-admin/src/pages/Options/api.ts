@@ -172,6 +172,8 @@ export function useDeleteProductOptionValue() {
       });
     },
     onError(e) {
+      console.log("🔥 ERR");
+      console.log(e);
       const message = deleteProductOptionValueApiErrorMessage(e);
       if (message) {
         toast.error(message, {
@@ -190,7 +192,7 @@ const createProductOptionApiErrorMessage = (
   if (e.type === "application") {
     if (
       e.error.details.code ===
-      "PRODUCT_OPTION.MULTIPLE_OPTION_VALUES_WITH_SAME_NAME"
+      "PRODUCT_OPTION_MULTIPLE_OPTION_VALUES_WITH_SAME_NAME"
     ) {
       return e.error.message;
     }
@@ -206,7 +208,7 @@ const editProductOptionApiErrorMessage = (
   if (e.type === "application") {
     if (
       e.error.details.code ===
-      "PRODUCT_OPTION.MULTIPLE_OPTION_VALUES_WITH_SAME_NAME"
+      "PRODUCT_OPTION_MULTIPLE_OPTION_VALUES_WITH_SAME_NAME"
     ) {
       return e.error.message;
     }
@@ -218,5 +220,12 @@ const editProductOptionApiErrorMessage = (
 const deleteProductOptionValueApiErrorMessage = (
   deleteProductOptionValueApiErrorMessage: unknown
 ) => {
+  const e = parseApiError(deleteProductOptionValueApiErrorMessage);
+  if (e.type === "application") {
+    if (e.error.details.code === "DB_DELETED_ENTITY_IN_USE") {
+      return `Unable to delete the option, it is currently in use by other products. You may delete those products first.`;
+    }
+  }
+
   return `An unexpected error had occured`;
 };

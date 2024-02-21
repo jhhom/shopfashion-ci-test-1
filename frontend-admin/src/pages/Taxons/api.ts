@@ -119,7 +119,7 @@ export function useCreateTaxon() {
       const e = parseApiError(err);
       const message =
         e.type === "application" &&
-        e.error.details.code === "DB.UNIQUE_VALUE_CONFLICT"
+        e.error.details.code === "DB_UNIQUE_VALUE_CONFLICT"
           ? `Cannot create taxon, the slug is in use by other taxons. Please use a different slug.`
           : `An unexpected error had occured`;
       toast.error(message, {
@@ -202,7 +202,7 @@ export function useEditTaxon() {
       const e = parseApiError(err);
       const message =
         e.type === "application" &&
-        e.error.details.code === "DB.UNIQUE_VALUE_CONFLICT"
+        e.error.details.code === "DB_UNIQUE_VALUE_CONFLICT"
           ? `Cannot create taxon, the slug is in use by other taxons. Please use a different slug.`
           : "An unexpected error had occured";
       if (message) {
@@ -257,7 +257,7 @@ export function useDeleteTaxon() {
       const e = parseApiError(err);
       const message =
         e.type === "application" &&
-        e.error.details.code === "DB.DELETED_ENTITY_IN_USE"
+        e.error.details.code === "DB_DELETED_ENTITY_IN_USE"
           ? `Cannot delete, the Taxon is in use`
           : `An unexpected error had occured`;
       if (message) {

@@ -4,16 +4,16 @@ const zErrorPayload = {
   RESOURCE_NOT_FOUND: z.object({
     resource: z.string(),
   }),
-  "AUTH.UNAUTHORIZED": z.undefined(),
-  "AUTH.INCORRECT_PASSWORD": z.undefined(),
-  "DB.UNIQUE_VALUE_CONFLICT": z.object({ entity: z.string() }),
-  "DB.DELETED_ENTITY_IN_USE": z.object({ entity: z.string() }),
-  "PRODUCT_OPTION.MULTIPLE_OPTION_VALUES_WITH_SAME_NAME": z.undefined(),
-  "PRODUCT_VARIANT.CONFLICT_OPTION_VALUES": z.object({ variant: z.string() }),
-  "PRODUCT_VARIANT.CONFLICT_VARIANT_NAMES": z.object({
+  AUTH_UNAUTHORIZED: z.undefined(),
+  AUTH_INCORRECT_PASSWORD: z.undefined(),
+  DB_UNIQUE_VALUE_CONFLICT: z.object({ entity: z.string() }),
+  DB_DELETED_ENTITY_IN_USE: z.object({ entity: z.string() }),
+  PRODUCT_OPTION_MULTIPLE_OPTION_VALUES_WITH_SAME_NAME: z.undefined(),
+  PRODUCT_VARIANT_CONFLICT_OPTION_VALUES: z.object({ variant: z.string() }),
+  PRODUCT_VARIANT_CONFLICT_VARIANT_NAMES: z.object({
     names: z.array(z.string()),
   }),
-  "PRODUCT_VARIANT.MULTI_CONFLICT_OPTION_VALUES": z.object({
+  PRODUCT_VARIANT_MULTI_CONFLICT_OPTION_VALUES: z.object({
     variants: z.array(z.array(z.string())),
   }),
 } as const;
@@ -24,19 +24,19 @@ export type ErrorPayload = {
 
 export const ErrorMessage: { [k in keyof ErrorPayload]: string } = {
   RESOURCE_NOT_FOUND: "Requested resource not found",
-  "AUTH.UNAUTHORIZED": "Unauthorized",
-  "AUTH.INCORRECT_PASSWORD": "Incorrect password",
-  "DB.DELETED_ENTITY_IN_USE":
+  AUTH_UNAUTHORIZED: "Unauthorized",
+  AUTH_INCORRECT_PASSWORD: "Incorrect password",
+  DB_DELETED_ENTITY_IN_USE:
     "The entity to be deleted is referenced or used by other entities",
-  "DB.UNIQUE_VALUE_CONFLICT":
+  DB_UNIQUE_VALUE_CONFLICT:
     "The value to be used is conflicting with other values",
-  "PRODUCT_OPTION.MULTIPLE_OPTION_VALUES_WITH_SAME_NAME":
+  PRODUCT_OPTION_MULTIPLE_OPTION_VALUES_WITH_SAME_NAME:
     "Multiple option values have the same name",
-  "PRODUCT_VARIANT.CONFLICT_OPTION_VALUES":
+  PRODUCT_VARIANT_CONFLICT_OPTION_VALUES:
     "Another product variant with same set of options already exist",
-  "PRODUCT_VARIANT.MULTI_CONFLICT_OPTION_VALUES":
+  PRODUCT_VARIANT_MULTI_CONFLICT_OPTION_VALUES:
     "Some product variants have the same set of options",
-  "PRODUCT_VARIANT.CONFLICT_VARIANT_NAMES":
+  PRODUCT_VARIANT_CONFLICT_VARIANT_NAMES:
     "Multiple variants have the same name",
 };
 
@@ -95,14 +95,14 @@ export const zApplicationErrorUnion = z.object({
   message: z.string(),
   details: z.discriminatedUnion("code", [
     createZodErrorSchemaDetails("RESOURCE_NOT_FOUND"),
-    createZodErrorSchemaDetails("AUTH.INCORRECT_PASSWORD"),
-    createZodErrorSchemaDetails("DB.DELETED_ENTITY_IN_USE"),
-    createZodErrorSchemaDetails("DB.UNIQUE_VALUE_CONFLICT"),
+    createZodErrorSchemaDetails("AUTH_INCORRECT_PASSWORD"),
+    createZodErrorSchemaDetails("DB_DELETED_ENTITY_IN_USE"),
+    createZodErrorSchemaDetails("DB_UNIQUE_VALUE_CONFLICT"),
     createZodErrorSchemaDetails(
-      "PRODUCT_OPTION.MULTIPLE_OPTION_VALUES_WITH_SAME_NAME"
+      "PRODUCT_OPTION_MULTIPLE_OPTION_VALUES_WITH_SAME_NAME"
     ),
-    createZodErrorSchemaDetails("PRODUCT_VARIANT.CONFLICT_OPTION_VALUES"),
-    createZodErrorSchemaDetails("PRODUCT_VARIANT.MULTI_CONFLICT_OPTION_VALUES"),
-    createZodErrorSchemaDetails("PRODUCT_VARIANT.CONFLICT_VARIANT_NAMES"),
+    createZodErrorSchemaDetails("PRODUCT_VARIANT_CONFLICT_OPTION_VALUES"),
+    createZodErrorSchemaDetails("PRODUCT_VARIANT_MULTI_CONFLICT_OPTION_VALUES"),
+    createZodErrorSchemaDetails("PRODUCT_VARIANT_CONFLICT_VARIANT_NAMES"),
   ]),
 });
