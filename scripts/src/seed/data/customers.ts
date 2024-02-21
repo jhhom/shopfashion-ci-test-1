@@ -1,0 +1,273 @@
+export type SeedCustomers = typeof customers;
+
+const customers = {
+  // male names
+  james: {
+    id: 0,
+    email: "james@email.com",
+    password: "james123",
+    name: "James Edison",
+  },
+  graham: {
+    id: 0,
+    email: "graham@email.com",
+    password: "graham123",
+    name: "Graham Smith",
+  },
+  ellis: {
+    id: 0,
+    email: "ellis@email.com",
+    password: "ellis123",
+    name: "Ellis Elton",
+  },
+  edith: {
+    id: 0,
+    email: "edith@email.com",
+    password: "edith123",
+    name: "Edith Bob",
+  },
+  jack: {
+    id: 0,
+    email: "jack@email.com",
+    password: "jack123",
+    name: "Jack Zhang",
+  },
+  willow: {
+    id: 0,
+    email: "willow@email.com",
+    password: "willow123",
+    name: "Willow Wilson",
+  },
+  sawyer: {
+    id: 0,
+    email: "sawyer@email.com",
+    password: "sawyer123",
+    name: "Tom Sawyer",
+  },
+  george: {
+    id: 0,
+    email: "george@email.com",
+    password: "george123",
+    name: "George Soros",
+  },
+  william: {
+    id: 0,
+    email: "william@email.com",
+    password: "william123",
+    name: "William Smith",
+  },
+  hudson: {
+    id: 0,
+    email: "hudson@email.com",
+    password: "hudson123",
+    name: "Hudson Jonathan",
+  },
+  nash: {
+    id: 0,
+    email: "nash@email.com",
+    password: "nash123",
+    name: "Nash Brown",
+  },
+  ralph: {
+    id: 0,
+    email: "ralph@email.com",
+    password: "ralph123",
+    name: "Ralph Li",
+  },
+  cole: {
+    id: 0,
+    email: "cole@email.com",
+    password: "cole123",
+    name: "Cole Nick",
+  },
+  julian: {
+    id: 0,
+    email: "julian@email.com",
+    password: "julian123",
+    name: "Julian Purple",
+  },
+  hayden: {
+    id: 0,
+    email: "hayden@email.com",
+    password: "hayden123",
+    name: "Hayden Ong",
+  },
+  lewis: {
+    id: 0,
+    email: "lewis@email.com",
+    password: "lewis123",
+    name: "Lewis Hamilton",
+  },
+  alfred: {
+    id: 0,
+    email: "alfred@email.com",
+    password: "alfred123",
+    name: "Alfred Albert",
+  },
+  charlie: {
+    id: 0,
+    email: "charlie@email.com",
+    password: "charlie123",
+    name: "Charlie Puth",
+  },
+  parker: {
+    id: 0,
+    email: "parker@email.com",
+    password: "parker123",
+    name: "Parker Pens",
+  },
+  mason: {
+    id: 0,
+    email: "mason@email.com",
+    password: "mason123",
+    name: "Mason Jar",
+  },
+  hugh: {
+    id: 0,
+    email: "hugh@email.com",
+    password: "hugh123",
+    name: "Hugh Morse",
+  },
+  arden: {
+    id: 0,
+    email: "arden@email.com",
+    password: "arden123",
+    name: "Arden Argyle",
+  },
+  benett: {
+    id: 0,
+    email: "benett@email.com",
+    password: "benett123",
+    name: "Benett Leona",
+  },
+
+  // female names
+  lucy: {
+    id: 0,
+    email: "lucy@email.com",
+    password: "lucy123",
+    name: "Lucy Lily",
+  },
+  mary: {
+    id: 0,
+    email: "mary@email.com",
+    password: "mary123",
+    name: "Mary Lowe",
+  },
+  daisy: {
+    id: 0,
+    email: "daisy@email.com",
+    password: "daisy123",
+    name: "Daisy Ridley",
+  },
+  olive: {
+    id: 0,
+    email: "olive@email.com",
+    password: "olive123",
+    name: "Olive Duck",
+  },
+  lily: {
+    id: 0,
+    email: "lily@email.com",
+    password: "lily123",
+    name: "Lily Fuentes",
+  },
+  hazel: {
+    id: 0,
+    email: "hazel@email.com",
+    password: "hazel123",
+    name: "Hazel Chang",
+  },
+  everett: {
+    id: 0,
+    email: "everett@email.com",
+    password: "everett123",
+    name: "Everett Lily",
+  },
+  scarlet: {
+    id: 0,
+    email: "scarlet@email.com",
+    password: "scarlet123",
+    name: "Scarlet AVa",
+  },
+  jane: {
+    id: 0,
+    email: "jane@email.com",
+    password: "jane123",
+    name: "Jane Emma",
+  },
+  evelyn: {
+    id: 0,
+    email: "evelyn@email.com",
+    password: "evelyn123",
+    name: "Evelyn Charlotte",
+  },
+  etta: {
+    id: 0,
+    email: "etta@email.com",
+    password: "etta123",
+    name: "Etta Amelia",
+  },
+  annie: {
+    id: 0,
+    email: "annie@email.com",
+    password: "annie123",
+    name: "Annie Sophia",
+  },
+  faith: {
+    id: 0,
+    email: "faith@email.com",
+    password: "faith123",
+    name: "Faith Yeoh",
+  },
+  rosie: {
+    id: 0,
+    email: "rosie@email.com",
+    password: "rosie123",
+    name: "Rosie Mia",
+  },
+  everly: {
+    id: 0,
+    email: "everly@email.com",
+    password: "everly123",
+    name: "Everly Luna",
+  },
+  maggie: {
+    id: 0,
+    email: "maggie@email.com",
+    password: "maggie123",
+    name: "Maggie Apple",
+  },
+  sunny: {
+    id: 0,
+    email: "sunny@email.com",
+    password: "sunny123",
+    name: "Sunny Lily",
+  },
+  jenna: {
+    id: 0,
+    email: "jenna@email.com",
+    password: "jenna123",
+    name: "Jenna Jen",
+  },
+  kate: {
+    id: 0,
+    email: "kate@email.com",
+    password: "kate123",
+    name: "Kate Winona",
+  },
+  may: {
+    id: 0,
+    email: "may@email.com",
+    password: "may123",
+    name: "May Alora",
+  },
+  henrietta: {
+    id: 0,
+    email: "henrietta@email.com",
+    password: "henrietta123",
+    name: "Henrietta Sol",
+  },
+};
+
+export { customers };

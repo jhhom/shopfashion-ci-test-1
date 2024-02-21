@@ -1,0 +1,18 @@
+{
+  "name": "db_migrations",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "migrate:test": "knex migrate:latest --knexfile=knexfile.cjs --env=test",
+    "migrate:": "knex migrate:latest --knexfile=knexfile.cjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "knex": "^3.1.0",
+    "pg": "^8.11.3"
+  }
+}

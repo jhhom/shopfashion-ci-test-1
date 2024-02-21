@@ -1,0 +1,26 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup": "tsx scripts/global.setup.ts",
+    "setup-and-test": "tsx scripts/global.setup.ts && playwright test",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.41.2",
+    "@types/node": "^20.11.16"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.202",
+    "dotenv": "^16.4.1",
+    "kysely": "^0.27.2",
+    "lodash": "^4.17.21",
+    "zod": "^3.22.4"
+  }
+}

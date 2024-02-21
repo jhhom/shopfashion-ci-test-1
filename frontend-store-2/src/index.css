@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* #f0f0f0 in decimal RGB */
+  --spinner-color: 45, 212, 191;
+}
+
+.mdxeditor > [role="toolbar"] {
+  @apply rounded-b-none rounded-t-md !important;
+  @apply w-full border border-gray-300;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.app-number-input::-webkit-outer-spin-button,
+.app-number-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.app-number-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* * START: LOADING SPINNER * */
+
+/* * REFERENCE: https://cssloaders.github.io/ */
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: block;
+  border-top: 3px solid rgb(var(--spinner-color));
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* * END: LOADING SPINNER * */
