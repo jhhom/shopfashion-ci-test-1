@@ -12,7 +12,7 @@ import { clsx as cx } from "clsx";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Link } from "@tanstack/react-router";
 import { Menu, Transition } from "@headlessui/react";
-import { ProductType } from "@api-contract/common";
+import { ProductType } from "~/api-contract/common";
 
 import { setHasAllElements } from "~/utils/utils";
 import { Table } from "~/pages/common/components/Table/Table";
@@ -60,7 +60,7 @@ export function ProductTable({
               checked={
                 setHasAllElements(
                   selectedRows,
-                  props.products.map((d) => d.id),
+                  props.products.map((d) => d.id)
                 ) && props.products.length !== 0
               }
               onChange={(e) => {
@@ -126,7 +126,7 @@ export function ProductTable({
         },
       }),
     ],
-    [selectedRows, props.products],
+    [selectedRows, props.products]
   );
 
   return <Table className="py-2" data={props.products} columns={columns} />;
@@ -141,7 +141,7 @@ function ButtonGroup(props: { productId: number; onDelete: () => void }) {
           productId: props.productId.toString(),
         }}
         className={cx(
-          "flex h-9 items-center rounded-l-md bg-gray-200 pl-1 pr-4 text-sm text-gray-500 hover:bg-gray-300",
+          "flex h-9 items-center rounded-l-md bg-gray-200 pl-1 pr-4 text-sm text-gray-500 hover:bg-gray-300"
         )}
       >
         <span className="flex h-9 w-9 items-center justify-center">
@@ -155,7 +155,7 @@ function ButtonGroup(props: { productId: number; onDelete: () => void }) {
           productId: props.productId.toString(),
         }}
         className={cx(
-          "flex h-9 items-center bg-gray-200 pl-1 pr-4 text-sm text-gray-500 hover:bg-gray-300",
+          "flex h-9 items-center bg-gray-200 pl-1 pr-4 text-sm text-gray-500 hover:bg-gray-300"
         )}
       >
         <span className="flex h-9 w-9 items-center justify-center">
@@ -166,7 +166,7 @@ function ButtonGroup(props: { productId: number; onDelete: () => void }) {
       <button
         onClick={props.onDelete}
         className={cx(
-          "flex h-9 items-center rounded-r-md bg-red-500 pl-1 pr-4 text-sm text-white",
+          "flex h-9 items-center rounded-r-md bg-red-500 pl-1 pr-4 text-sm text-white"
         )}
       >
         <span className="flex h-9 w-9 items-center justify-center">

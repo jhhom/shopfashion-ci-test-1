@@ -1,5 +1,5 @@
-import { PurchaseStatusType } from "@api-contract/common";
-import { StoreCustomersRequests } from "@api-contract/store-api/api";
+import { PurchaseStatusType } from "~/api-contract/common";
+import { StoreCustomersRequests } from "~/api-contract/store-api/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { client } from "~/external/api-client/client";

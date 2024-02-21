@@ -1,8 +1,8 @@
 import { ApiFetcherArgs, initClient, tsRestFetchApi } from "@ts-rest/core";
-import { apiContract } from "~/shared/api-contract/store-api/api";
-import { config } from "@config/config";
+import { apiContract } from "~/api-contract/store-api/api";
 
 import { authStorage } from "~/external/browser/local-storage/auth";
+import { config } from "~/config/config";
 
 export const client = initClient(apiContract, {
   baseUrl: config.SERVER_URL,

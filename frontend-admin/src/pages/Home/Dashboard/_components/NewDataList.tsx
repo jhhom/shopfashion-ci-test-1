@@ -1,4 +1,4 @@
-import { AdminDashboardResponse } from "@api-contract/admin-api/types";
+import { AdminDashboardResponse } from "~/api-contract/admin-api/types";
 import { Link } from "@tanstack/react-router";
 import { clsx as cx } from "clsx";
 import { IconMagnifyingGlass } from "~/pages/common/Icons";
@@ -15,7 +15,7 @@ export function NewCustomerList({
     <div
       className={cx(
         "rounded-sm border border-gray-200 bg-white text-sm",
-        className,
+        className
       )}
     >
       <div className="border-b border-gray-200 px-6 py-4 font-medium">
@@ -44,7 +44,7 @@ export function NewOrders({
     <div
       className={cx(
         "rounded-sm border border-gray-200 bg-white text-sm",
-        className,
+        className
       )}
     >
       <div className="border-b px-6 py-4 font-medium">New orders</div>

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { client } from "~/external/api-client/client";
 import { useQuery } from "@tanstack/react-query";
-import { StoreProductsResponse } from "~/shared/api-contract/store-api/api";
+import { StoreProductsResponse } from "~/api-contract/store-api/api";
 import { Link } from "@tanstack/react-router";
 import { IconMinus, IconPlus } from "~/pages/common/Icons";
 import { ProductListingItem } from "~/pages/ProductListingByTaxon/page";

@@ -1,7 +1,7 @@
 import {
   StoreCustomersRequests,
   StoreProductsRequests,
-} from "@api-contract/store-api/api";
+} from "~/api-contract/store-api/api";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { client } from "~/external/api-client/client";
 import { QUERY_KEY } from "~/pages/ProductDetails/query";
@@ -24,7 +24,7 @@ export function useProductDetails(productId: number) {
 
 export function useBreadcrumbs(
   productId: number,
-  fromTaxon: string | undefined,
+  fromTaxon: string | undefined
 ) {
   return useQuery({
     queryKey: ["breadcrumbs", productId, fromTaxon],
@@ -45,7 +45,7 @@ export function useBreadcrumbs(
 export function useAddtoCart() {
   return useMutation({
     mutationFn: async (
-      item: StoreCustomersRequests["customerAddToCart"]["body"],
+      item: StoreCustomersRequests["customerAddToCart"]["body"]
     ) => {
       const r = await client.customers.customerAddToCart({
         body: item,

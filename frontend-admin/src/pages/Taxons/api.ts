@@ -1,7 +1,7 @@
 import { client } from "~/external/api-client/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { AdminTaxonsRequests } from "@api-contract/admin-api/types";
+import { AdminTaxonsRequests } from "~/api-contract/admin-api/types";
 import { parseApiError } from "~/utils/api";
 import { useEffect } from "react";
 

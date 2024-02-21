@@ -1,4 +1,4 @@
-import { AdminProductOptionsRequests } from "@api-contract/admin-api/types";
+import { AdminProductOptionsRequests } from "~/api-contract/admin-api/types";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { client } from "~/external/api-client/client";
 import { parseApiError } from "~/utils/api";

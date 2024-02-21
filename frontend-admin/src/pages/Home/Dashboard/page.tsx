@@ -8,7 +8,7 @@ import {
 import { SalesSummary } from "~/pages/Home/Dashboard/_components/SalesSummary";
 import { Link, LinkOptions } from "@tanstack/react-router";
 import { useState } from "react";
-import { SalesGraphPeriod } from "@api-contract/common";
+import { SalesGraphPeriod } from "~/api-contract/common";
 import { LoadingSpinnerOverlay } from "~/pages/common/components/LoadingSpinnerOverlay";
 
 import {

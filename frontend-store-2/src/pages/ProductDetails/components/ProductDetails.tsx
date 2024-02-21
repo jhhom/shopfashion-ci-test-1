@@ -1,4 +1,4 @@
-import { StoreProductsResponse } from "@api-contract/store-api/api";
+import { StoreProductsResponse } from "~/api-contract/store-api/api";
 import { match } from "ts-pattern";
 import { IconCheck, IconShirt } from "~/pages/common/Icons";
 import { useEffect, useMemo, useState } from "react";
@@ -8,7 +8,7 @@ import { Rating } from "~/pages/common/Rating";
 import { clsx as cx } from "clsx";
 import { useMap, Actions } from "usehooks-ts";
 import { getDisabledOptions2 } from "~/pages/ProductDetails/components/get-disabled-options/get-disabled-options-3";
-import { ProductStatus } from "@api-contract/common";
+import { ProductStatus } from "~/api-contract/common";
 
 type Product = StoreProductsResponse["getOneProduct"]["body"];
 

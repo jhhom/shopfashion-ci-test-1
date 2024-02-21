@@ -1,6 +1,6 @@
 import { ApiFetcherArgs, initClient, tsRestFetchApi } from "@ts-rest/core";
-import { apiContract } from "@api-contract/admin-api/api";
-import { config } from "@config/config";
+import { apiContract } from "~/api-contract/admin-api/api";
+import { config } from "~/config/config";
 
 import { storage } from "~/external/browser/use-local-storage-auth";
 

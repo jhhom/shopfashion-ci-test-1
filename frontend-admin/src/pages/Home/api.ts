@@ -1,4 +1,4 @@
-import { SalesGraphPeriod } from "@api-contract/common";
+import { SalesGraphPeriod } from "~/api-contract/common";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { client } from "~/external/api-client/client";
 import { useAfterVerifyTokenNavigation } from "~/providers/after-verify-token-navigation";

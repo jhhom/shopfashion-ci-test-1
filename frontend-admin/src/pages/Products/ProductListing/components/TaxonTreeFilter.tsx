@@ -1,7 +1,7 @@
 import { useState, ComponentProps } from "react";
 import { clsx as cx } from "clsx";
 import { IconCaretRight, IconAngleLeft } from "~/pages/common/Icons";
-import { AdminTaxonsResponse } from "@api-contract/admin-api/types";
+import { AdminTaxonsResponse } from "~/api-contract/admin-api/types";
 import { Link } from "@tanstack/react-router";
 
 type TaxonTreeNode = AdminTaxonsResponse["taxonTree"]["body"][number];

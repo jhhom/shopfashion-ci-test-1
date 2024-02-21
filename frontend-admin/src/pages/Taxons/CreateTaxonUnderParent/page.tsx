@@ -14,7 +14,7 @@ import { Spinner } from "~/pages/Taxons/_components/Spinner";
 
 import { useDebounce } from "@uidotdev/usehooks";
 import { match } from "ts-pattern";
-import { slugRegex } from "@api-contract/common";
+import { slugRegex } from "~/api-contract/common";
 import { useAssignableTaxonParents, useCreateTaxon } from "~/pages/Taxons/api";
 
 const formSchema = z.object({

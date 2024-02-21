@@ -29,7 +29,7 @@ import {
   useTaxonParents,
   useTaxonTree,
 } from "~/pages/Products/api";
-import { zProductStatus } from "@api-contract/common";
+import { zProductStatus } from "~/api-contract/common";
 
 const formSchema = z.object({
   name: z.string().min(1, "Product name is required"),

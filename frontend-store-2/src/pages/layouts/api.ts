@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { QUERY_KEY } from "~/pages/layouts/query";
 
 import { client } from "~/external/api-client/client";
-import { StoreProductsRequests } from "@api-contract/store-api/api";
+import { StoreProductsRequests } from "~/api-contract/store-api/api";
 
 export function useTaxonTree() {
   return useQuery({
@@ -47,7 +47,7 @@ export function useCustomerLogin({
 }) {
   return useMutation({
     mutationFn: async (
-      credentials: StoreProductsRequests["customerLogin"]["body"],
+      credentials: StoreProductsRequests["customerLogin"]["body"]
     ) => {
       const r = await client.products.customerLogin({ body: credentials });
       if (r.status !== 200) {

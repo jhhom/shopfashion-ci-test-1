@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import type { Taxon } from "@api-contract/common";
+import type { Taxon } from "~/api-contract/common";
 
 export function NavPopup(props: { onClick?: () => void; taxonTree: Taxon[] }) {
   return (

@@ -10,7 +10,7 @@ import {
   FieldError,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AdminProductVariantResponse } from "@api-contract/admin-api/types";
+import { AdminProductVariantResponse } from "~/api-contract/admin-api/types";
 import { DeleteButton } from "~/pages/common/components/Buttons";
 import { InputField } from "~/pages/common/components/Form/InputField";
 

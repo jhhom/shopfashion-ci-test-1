@@ -4,10 +4,10 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { setupServer } from "msw/node";
 import { http, HttpResponse } from "msw";
-import { config } from "~/shared/config/config";
 import { client } from "~/external/api-client/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Search } from "~/pages/layouts/Root.layout/components/Search";
+import { config } from "~/config/config";
 
 import "@testing-library/jest-dom/vitest";
 

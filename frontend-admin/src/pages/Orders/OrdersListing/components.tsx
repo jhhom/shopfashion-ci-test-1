@@ -6,8 +6,8 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 import { clsx as cx } from "clsx";
-import { OrderStatus } from "@api-contract/common";
-import { OrderLineItemStatus } from "@api-contract/common";
+import { OrderStatus } from "~/api-contract/common";
+import { OrderLineItemStatus } from "~/api-contract/common";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useMemo, useState } from "react";
 import { IconX } from "~/pages/common/Icons";
@@ -164,7 +164,7 @@ export function OrdersTable(props: {
         },
       }),
     ],
-    [setOrderDialog],
+    [setOrderDialog]
   );
 
   return (

@@ -60,7 +60,7 @@ dist-ssr
 *.sln
 *.sw?
 
-frontend-*/**/config.ts
+frontend-store-2/src/config/stripe-config.ts
 
 .DS_Store
 .env

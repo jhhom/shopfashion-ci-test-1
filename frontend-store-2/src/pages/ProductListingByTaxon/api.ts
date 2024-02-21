@@ -1,14 +1,14 @@
 import {
   StoreCustomersRequests,
   StoreProductsRequests,
-} from "@api-contract/store-api/api";
+} from "~/api-contract/store-api/api";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { client } from "~/external/api-client/client";
 import { QUERY_KEY } from "~/pages/ProductListingByTaxon/query";
 import toast from "react-hot-toast";
 
 export function useProductListings(
-  query: StoreProductsRequests["productsByTaxonSlug"]["query"],
+  query: StoreProductsRequests["productsByTaxonSlug"]["query"]
 ) {
   return useQuery({
     queryKey: [QUERY_KEY.product_listing, JSON.stringify(query)],

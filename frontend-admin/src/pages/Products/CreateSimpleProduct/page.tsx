@@ -7,7 +7,7 @@ import { z } from "zod";
 import { TaxonTreeSelection } from "~/pages/Products/_components/TaxonTreeSelection";
 import { useState } from "react";
 import { default as ReactSelect } from "react-select";
-import { zProductStatus } from "@api-contract/common";
+import { zProductStatus } from "~/api-contract/common";
 import { InputField } from "~/pages/common/components/Form/InputField";
 import { SelectField } from "~/pages/common/components/Form/SelectField";
 import { FormCreateActionButtons } from "~/pages/common/components/Form/FormCreateActionButtons";

@@ -24,10 +24,10 @@
             "./src/*"
           ],
           "@api-contract/*": [
-              "./src/shared/api-contract/*"
+              "./src/api-contract/*"
           ],
           "@config/*": [
-              "./src/shared/config/*"
+              "./src/config/*"
           ]
     },
     "outDir": "dist"

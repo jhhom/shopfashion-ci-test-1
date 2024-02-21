@@ -1,5 +1,5 @@
-import { OrderLineItemStatus } from "@api-contract/common";
-import { OrderStatus } from "@api-contract/common";
+import { OrderLineItemStatus } from "~/api-contract/common";
+import { OrderStatus } from "~/api-contract/common";
 import { clsx as cx } from "clsx";
 import { match } from "ts-pattern";
 import {
@@ -18,7 +18,7 @@ export function OrderPaymentStatus(props: { status: OrderStatus }) {
         {
           "bg-green-500": props.status === "PAID",
           "bg-red-500": props.status === "CANCELLED",
-        },
+        }
       )}
     >
       <div className="flex h-5 w-5 items-center justify-center">
@@ -45,7 +45,7 @@ export function OrderShippingStatus(props: { status: OrderLineItemStatus }) {
           "bg-blue-500": props.status === "TO_RECEIVE",
           "bg-amber-500":
             props.status === "TO_SHIP" || props.status === "PROCESSING",
-        },
+        }
       )}
     >
       <div className="flex h-5 w-5 items-center justify-center">

@@ -1,4 +1,4 @@
-import { ProductStatus } from "@api-contract/common";
+import { ProductStatus } from "~/api-contract/common";
 import { Link } from "@tanstack/react-router";
 import { MissingProductImage } from "~/pages/common/ErrorContents";
 import { IconClose } from "~/pages/common/Icons";

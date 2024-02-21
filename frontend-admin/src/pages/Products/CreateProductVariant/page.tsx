@@ -5,7 +5,7 @@ import { PageTitle } from "~/pages/common/components/PageTitle";
 import { IconExclamationCircle } from "~/pages/common/Icons";
 
 import { useState } from "react";
-import { zProductStatus } from "@api-contract/common";
+import { zProductStatus } from "~/api-contract/common";
 import { InputField } from "~/pages/common/components/Form/InputField";
 import { SelectField } from "~/pages/common/components/Form/SelectField";
 import { FormCreateActionButtons } from "~/pages/common/components/Form/FormCreateActionButtons";

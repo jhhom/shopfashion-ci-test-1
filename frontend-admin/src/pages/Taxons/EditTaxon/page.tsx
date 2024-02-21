@@ -11,7 +11,7 @@ import { QUERY_KEY } from "~/pages/Taxons/api";
 import { useDebounce } from "@uidotdev/usehooks";
 import { match } from "ts-pattern";
 
-import { slugRegex } from "@api-contract/common";
+import { slugRegex } from "~/api-contract/common";
 import { InputField } from "~/pages/common/components/Form/InputField";
 import { useEditTaxon, useOneTaxon } from "~/pages/Taxons/api";
 

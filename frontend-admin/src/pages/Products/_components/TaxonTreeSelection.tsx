@@ -5,7 +5,7 @@ import {
   IconFolderFilled,
   IconFolderOpen,
 } from "~/pages/common/Icons";
-import { AdminTaxonsResponse } from "@api-contract/admin-api/types";
+import { AdminTaxonsResponse } from "~/api-contract/admin-api/types";
 
 type TaxonTreeNode = AdminTaxonsResponse["taxonTree"]["body"][number];
 

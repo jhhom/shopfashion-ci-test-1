@@ -1,10 +1,10 @@
-import { OrderStatus } from "@api-contract/common";
+import { OrderStatus } from "~/api-contract/common";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Table } from "~/pages/common/components/Table/Table";
 import { format } from "date-fns";
 import { IconMagnifyingGlass } from "~/pages/common/Icons";
 import { Link } from "@tanstack/react-router";
-import { OrderLineItemStatus } from "@api-contract/common";
+import { OrderLineItemStatus } from "~/api-contract/common";
 import { NoResultIndicator } from "~/pages/common/components/Table/NoResultIndicator";
 import {
   OrderPaymentStatus,

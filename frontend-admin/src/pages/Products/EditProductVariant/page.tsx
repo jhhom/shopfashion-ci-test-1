@@ -9,7 +9,7 @@ import { IconExclamationCircle, IconSave } from "~/pages/common/Icons";
 import { z } from "zod";
 import { clsx as cx } from "clsx";
 
-import { zProductStatus } from "@api-contract/common";
+import { zProductStatus } from "~/api-contract/common";
 import { Select } from "~/pages/common/components/Select";
 import { Form } from "~/pages/common/components/Form/Form";
 import { UnexpectedErrorMessage } from "~/pages/common/components/Errors";

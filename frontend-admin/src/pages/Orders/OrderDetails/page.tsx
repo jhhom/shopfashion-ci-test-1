@@ -19,7 +19,7 @@ import { LoadingSpinnerOverlay } from "~/pages/common/components/LoadingSpinnerO
 import { OrderShippingStatus } from "~/pages/common/components/Table/OrderStatus";
 import { formatPrice } from "~/utils/utils";
 import { useOrder, useUpdateShipmentStatus } from "~/pages/Orders/api";
-import { OrderLineItemStatus } from "@api-contract/common";
+import { OrderLineItemStatus } from "~/api-contract/common";
 
 export function OrderDetailsPage() {
   const orderId = Number.parseInt(

@@ -7,9 +7,9 @@ import {
   AdminProductVariantRequests,
   AdminProductVariantResponse,
   AdminProductsRequests,
-} from "@api-contract/admin-api/types";
+} from "~/api-contract/admin-api/types";
 import { parseApiError } from "~/utils/api";
-import { Pagination } from "@api-contract/common";
+import { Pagination } from "~/api-contract/common";
 import { PaginationParameters } from "~/utils/pagination";
 import { useEffect } from "react";
 

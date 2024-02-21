@@ -17,9 +17,9 @@ import { PageTitle } from "~/pages/common/components/PageTitle";
 import { IconCalendar, IconChevronRight } from "~/pages/common/Icons";
 import { clsx as cx } from "clsx";
 import { useMemo, useState } from "react";
-import { SalesGraphPeriod } from "@api-contract/common";
+import { SalesGraphPeriod } from "~/api-contract/common";
 import { Duration, add, format, isToday, sub } from "date-fns";
-import { AdminDashboardResponse } from "@api-contract/admin-api/types";
+import { AdminDashboardResponse } from "~/api-contract/admin-api/types";
 import { formatPrice } from "~/utils/utils";
 
 export const options: ChartOptions = {
@@ -56,7 +56,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 );
 
 export function SalesSummary({
@@ -82,7 +82,7 @@ export function SalesSummary({
     return {
       labels:
         data.salesAmount.map((a) =>
-          formatGraphDate(new Date(a.date), period),
+          formatGraphDate(new Date(a.date), period)
         ) ?? [],
 
       datasets: [
@@ -101,7 +101,7 @@ export function SalesSummary({
     <div
       className={cx(
         "rounded-sm border border-gray-200 bg-white shadow-o-sm",
-        className,
+        className
       )}
     >
       <div className="block h-24 border-b border-gray-200 text-sm md:flex md:h-16 md:flex-row md:items-center md:justify-between md:px-5">

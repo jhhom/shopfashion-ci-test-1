@@ -6,9 +6,9 @@ import { default as ReactSelect } from "react-select";
 import { Select } from "~/pages/common/components/Select";
 import { useState } from "react";
 import { TaxonTreeSelection } from "~/pages/Products/_components/TaxonTreeSelection";
-import { Taxon } from "@api-contract/common";
+import { Taxon } from "~/api-contract/common";
 
-import { zProductStatus, ProductStatus } from "@api-contract/common";
+import { zProductStatus, ProductStatus } from "~/api-contract/common";
 import { ComboboxField } from "~/pages/common/components/Form/ComboboxField";
 import { InputField } from "~/pages/common/components/Form/InputField";
 

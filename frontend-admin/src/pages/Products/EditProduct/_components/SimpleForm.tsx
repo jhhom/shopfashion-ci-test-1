@@ -5,10 +5,10 @@ import { Link } from "@tanstack/react-router";
 import { Select } from "~/pages/common/components/Select";
 import { useEffect, useState } from "react";
 import { TaxonTreeSelection } from "~/pages/Products/_components/TaxonTreeSelection";
-import { Taxon } from "@api-contract/common";
+import { Taxon } from "~/api-contract/common";
 import { default as ReactSelect } from "react-select";
 
-import { zProductStatus, ProductStatus } from "@api-contract/common";
+import { zProductStatus, ProductStatus } from "~/api-contract/common";
 import { ComboboxField } from "~/pages/common/components/Form/ComboboxField";
 import {
   InputField,

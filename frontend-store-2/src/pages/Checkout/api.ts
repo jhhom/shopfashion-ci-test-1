@@ -1,4 +1,4 @@
-import { StoreCustomersRequests } from "@api-contract/store-api/api";
+import { StoreCustomersRequests } from "~/api-contract/store-api/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { client } from "~/external/api-client/client";
 import { QUERY_KEY } from "~/pages/ProductListingByTaxon/query";

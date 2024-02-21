@@ -8,7 +8,7 @@ import {
   IconPencil,
   IconThrashCan,
 } from "~/pages/common/Icons";
-import { AdminTaxonsResponse } from "@api-contract/admin-api/types";
+import { AdminTaxonsResponse } from "~/api-contract/admin-api/types";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "@tanstack/react-router";
 
