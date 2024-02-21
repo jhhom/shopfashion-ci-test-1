@@ -64,3 +64,4 @@ frontend-*/**/config.ts
 
 .DS_Store
 .env
+pm2-logs

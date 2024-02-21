@@ -29,7 +29,8 @@
           "@config/*": [
               "./src/shared/config/*"
           ]
-    }
+    },
+    "outDir": "dist"
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

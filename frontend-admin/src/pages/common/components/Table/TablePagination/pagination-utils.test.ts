@@ -1,6 +1,6 @@
 import { test } from "vitest";
-import { paginationToItems } from "~/pages/Experiment.page/subpages/Pagination2.page/FashionablePagination/pagination";
-import type { OutputItem } from "~/pages/Experiment.page/subpages/Pagination2.page/FashionablePagination/pagination";
+import { paginationToItems } from "~/pages/common/components/Table/TablePagination/pagination-utils";
+import type { OutputItem } from "~/pages/common/components/Table/TablePagination/pagination-utils";
 
 test("pagination test", () => {
   /*

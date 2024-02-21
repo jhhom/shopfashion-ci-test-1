@@ -33,7 +33,9 @@ export function Select<T extends React.Key>(props: SelectProps<T>) {
           props.onChange(v as T);
         }
       }}
+      // @ts-ignore
       defaultSelectedKey={props.defaultValue}
+      // @ts-ignore
       selectedKey={props.value}
       className={cx(
         "w-[150px] bg-white text-sm focus:outline-none",
@@ -78,6 +80,7 @@ export function Select<T extends React.Key>(props: SelectProps<T>) {
 function SelectItem<T extends React.Key>(props: { id: T; item: string }) {
   return (
     <ListBoxItem
+      // @ts-ignore
       id={props.id}
       className="min-h-[2rem] w-full cursor-pointer rounded-md px-4 py-1.5 hover:bg-gray-100 focus:outline-none"
     >

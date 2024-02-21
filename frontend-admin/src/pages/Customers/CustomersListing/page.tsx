@@ -14,7 +14,6 @@ import {
   TablePagination,
   useTablePagination,
 } from "~/pages/common/components/Table/TablePagination/Pagination";
-import { Select } from "~/pages/common/components/Select";
 import {
   TableFilterAccordion,
   FilterInputField,
