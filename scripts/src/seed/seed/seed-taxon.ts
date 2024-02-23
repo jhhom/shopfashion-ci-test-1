@@ -1,4 +1,4 @@
-import { KyselyDB } from "@seed/seed/db";
+import { KyselyDB } from "@seed/db";
 import type { SeedTaxon } from "@seed/data/taxons";
 
 type TaxonData = {

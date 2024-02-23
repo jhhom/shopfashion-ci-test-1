@@ -1,4 +1,4 @@
-import { KyselyDB } from "@seed/seed/db";
+import { KyselyDB } from "@seed/db";
 import { SeedCustomers } from "@seed/data/customers";
 import { SeedProducts } from "@seed/data/products/products";
 

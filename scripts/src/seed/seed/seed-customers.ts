@@ -1,4 +1,4 @@
-import { KyselyDB } from "@seed/seed/db";
+import { KyselyDB } from "@seed/db";
 import { SeedCustomers } from "@seed/data/customers";
 
 export async function seedCustomers(db: KyselyDB, customers: SeedCustomers) {

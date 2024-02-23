@@ -1,16 +1,15 @@
-import pg from "pg";
-import { CamelCasePlugin, PostgresDialect, Kysely, sql } from "kysely";
-import { loadSeedConfig } from "@seed/config";
-
 import { DB } from "@seed/codegen/schema";
+import { CamelCasePlugin, Kysely, PostgresDialect } from "kysely";
+import { Pool } from "pg";
 
-export type KyselyDB = Kysely<DB>;
-
-export function initDb(databaseUrl: string) {
-  const Pool = pg.Pool;
-
-  const config = loadSeedConfig();
-
+export async function seedAdmin(
+  databaseUrl: string,
+  admin: {
+    username: string;
+    password: string;
+    email: string;
+  }
+) {
   const dialect = new PostgresDialect({
     pool: new Pool({
       connectionString: databaseUrl,
@@ -28,5 +27,5 @@ export function initDb(databaseUrl: string) {
     plugins: [new CamelCasePlugin()],
   });
 
-  return db;
+  await db.insertInto("admins").values(admin).execute();
 }

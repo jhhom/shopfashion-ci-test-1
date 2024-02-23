@@ -1,4 +1,4 @@
-import { KyselyDB } from "@seed/seed/db";
+import { KyselyDB } from "@seed/db";
 
 export async function seedAdmins(db: KyselyDB) {
   await db

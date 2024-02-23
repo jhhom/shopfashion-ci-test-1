@@ -7,7 +7,8 @@
     "lol": "tsx src/lol.ts",
     "lol-e2e": "tsx src/lol.ts --env e2e",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "tsx src/seed/seed.ts",
+    "seed": "tsx src/seed/mains/main-seed.ts",
+    "seed-admin": "tsx src/seed/mains/main-seed-admin.ts",
     "migrate-db": "knex migrate:latest --knexfile src/migrate-db/knexfile.cjs",
     "migrate-db:e2e": "knex migrate:latest --knexfile src/migrate-db/knexfile.cjs --env=e2e"
   },

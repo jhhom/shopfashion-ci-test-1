@@ -1,5 +1,5 @@
 import { SeedOptions } from "@seed/data/product-options";
-import { KyselyDB } from "@seed/seed/db";
+import { KyselyDB } from "@seed/db";
 
 export const seedOptions = async (db: KyselyDB, options: SeedOptions) => {
   for (const [code, option] of Object.entries(options)) {

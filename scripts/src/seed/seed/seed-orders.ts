@@ -1,4 +1,4 @@
-import { KyselyDB } from "@seed/seed/db";
+import { KyselyDB } from "@seed/db";
 import { SeedCustomers } from "@seed/data/customers";
 import { SeedOrders } from "@seed/data/orders/orders";
 import { constructGetProduct } from "@seed/data/orders/convert-products";

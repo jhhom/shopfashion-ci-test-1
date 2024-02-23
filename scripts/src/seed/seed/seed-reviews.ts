@@ -1,7 +1,7 @@
-import { KyselyDB } from "@seed/seed/db";
+import { KyselyDB } from "@seed/db";
 import { sql } from "kysely";
 import { SeedReviews } from "@seed/data/reviews";
-import { todayInUTC } from "@seed/seed/seed-orders";
+import { todayInUTC } from "@seed/seed-orders";
 import { faker } from "@faker-js/faker";
 import _ from "lodash";
 

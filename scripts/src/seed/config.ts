@@ -1,12 +1,25 @@
 import * as dotenv from "dotenv";
 import { z } from "zod";
 
-const configSchema = z.object({
+const seedConfigSchema = z.object({
   DATABASE_URL: z.string().min(1),
 });
 
-export function loadConfig() {
+const seedAdminConfigSchema = z.object({
+  DATABASE_URL: z.string().min(1),
+  ADMIN_SEED_EMAIL: z.string().min(1),
+  ADMIN_SEED_PASSWORD: z.string().min(1),
+  ADMIN_SEED_USERNAME: z.string().min(1),
+});
+
+export function loadSeedConfig() {
   dotenv.config();
-  const result = configSchema.parse(process.env);
+  const result = seedConfigSchema.parse(process.env);
+  return result;
+}
+
+export function loadSeedAdminConfig() {
+  dotenv.config();
+  const result = seedAdminConfigSchema.parse(process.env);
   return result;
 }
