@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class MediaService {
   private final String ASSET_SERVER_URL;
-  private final String ASSET_PATH = "src/main/resources/static";
+  private final String ASSET_PATH = "static";
 
   private final String ASSET_PRODUCT_IMAGE_PATH = "products/images";
 
-  public MediaService(@Value("${server.port}") String runningPort) {
-    this.ASSET_SERVER_URL = "http://localhost:" + runningPort + "/static";
+  public MediaService(@Value("${server.domain}") String domain) {
+    this.ASSET_SERVER_URL = domain + "/static";
   }
 
   /**

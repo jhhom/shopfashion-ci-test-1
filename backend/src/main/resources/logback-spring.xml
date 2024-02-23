@@ -63,7 +63,7 @@
     </logger>
     <logger name="api" level="INFO" additivity="false">
         <appender-ref ref="RollingFile" />
-        <appender-ref ref="STDOUT-JSON" />
+        <!-- <appender-ref ref="STDOUT-JSON" /> -->
     </logger>
 
 </configuration>

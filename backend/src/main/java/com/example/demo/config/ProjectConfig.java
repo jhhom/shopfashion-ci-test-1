@@ -31,8 +31,20 @@ public class ProjectConfig {
   @Value("${spring.datasource.url}")
   private String dataSourceUrl;
 
+  @Value("${spring.datasource.username}")
+  private String dataSourceUsername;
+
+  @Value("${spring.datasource.password:}")
+  private String dataSourcePassword;
+
   @Value("${spring.datasource.e2e.url}")
   private String e2eDataSourceUrl;
+
+  @Value("${spring.datasource.e2e.username}")
+  private String e2eDataSourceUsername;
+
+  @Value("${spring.datasource.e2e.password:}")
+  private String e2eDataSourcePassword;
 
   @Value("${environment.e2e:#{false}}")
   public Boolean isE2EEnvironment;
@@ -43,10 +55,14 @@ public class ProjectConfig {
     dataSourceBuilder.driverClassName("org.postgresql.Driver");
     if (isE2EEnvironment != null && isE2EEnvironment) {
       dataSourceBuilder.url(e2eDataSourceUrl);
+      dataSourceBuilder.username(e2eDataSourceUsername);
+      dataSourceBuilder.password(e2eDataSourcePassword);
     } else {
       dataSourceBuilder.url(dataSourceUrl);
+      dataSourceBuilder.username(dataSourceUsername);
+      dataSourceBuilder.password(dataSourcePassword);
     }
-    dataSourceBuilder.username("postgres");
+
     return dataSourceBuilder.build();
   }
 

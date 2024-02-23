@@ -1,0 +1,53 @@
+version: '2'
+name: shopfashion
+services:
+  shopfashion-app:
+    image: 'shopfashion-app:latest'
+    build:
+      context: ..
+      dockerfile: ./docker/app.Dockerfile
+    container_name: shopfashion-app
+    ports:
+      - "9800:9800"
+    volumes:
+      - 'shopfashion-static-assets:/app/static'
+    depends_on:
+      - shopfashion-db
+    networks:
+      - shopfashion-network
+  shopfashion-db:
+    image: 'postgres:15.1-alpine'
+    container_name: shopfashion-db
+    build:
+      context: ..
+      dockerfile: ./docker/db.Dockerfile
+    environment:
+      POSTGRES_DB: shopfashion_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PG_DATA: '/var/lib/postgresql/data'
+    expose:
+      - 5432
+    networks:
+      - shopfashion-network
+    volumes:
+      - 'shopfashion-db:/var/lib/postgresql/data'
+    
+
+volumes:
+  shopfashion-db:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ./docker-volumes/db
+  shopfashion-static-assets:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ./docker-volumes/assets
+
+
+networks:
+  shopfashion-network:

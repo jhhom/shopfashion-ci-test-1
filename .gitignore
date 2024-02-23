@@ -65,3 +65,10 @@ frontend-store-2/src/config/stripe-config.ts
 .DS_Store
 .env
 pm2-logs
+
+backend/static/**/*
+!backend/static/.gitkeep
+
+backend/docker/docker-volumes/assets/**/*
+backend/docker/docker-volumes/db/**/*
+!backend/docker/docker-volumes/.gitkeep
