@@ -60,18 +60,15 @@ export class AppError extends Error {
   }
 }
 
-export const isAppError = (e: unknown): e is AppErrorUnion => {
+export const isAppError = (e: unknown): e is ApplicationError => {
   if (e === undefined || e === null) {
     return false;
   }
-  const assertedE = e as AppErrorUnion;
-
-  return (
-    assertedE.details !== undefined &&
-    typeof assertedE.details === "object" &&
-    typeof assertedE.message === "string" &&
-    assertedE.details.code in ErrorMessage
-  );
+  const err = zApplicationError.safeParse(e);
+  if (err.success) {
+    return true;
+  }
+  return false;
 };
 
 export type AppErrorUnion = {
@@ -106,3 +103,10 @@ export const zApplicationErrorUnion = z.object({
     createZodErrorSchemaDetails("PRODUCT_VARIANT_CONFLICT_VARIANT_NAMES"),
   ]),
 });
+
+export const zApplicationError = z.object({
+  type: z.literal("application"),
+  error: zApplicationErrorUnion,
+});
+
+export type ApplicationError = z.infer<typeof zApplicationError>;

@@ -23,6 +23,7 @@ import path from "path";
 import { DB } from "@seed/codegen/schema";
 
 import * as fs from "fs";
+import { seedAssociations } from "@seed/seed/seed-associations";
 
 async function truncateTable(
   db: KyselyDB,
@@ -43,6 +44,7 @@ async function seedDatabase(db: KyselyDB) {
     "products",
     "customers",
     "admins",
+    "productAssociations",
   ];
 
   for (const t of tableToTruncate) {
@@ -65,6 +67,8 @@ async function seedDatabase(db: KyselyDB) {
 
   await seedReviews(db, { reviews });
   await seedAdmins(db);
+
+  await seedAssociations(db, products);
 }
 
 function seedAssets(paths: {

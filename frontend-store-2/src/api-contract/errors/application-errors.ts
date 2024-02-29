@@ -106,3 +106,8 @@ export const zApplicationErrorUnion = z.object({
     createZodErrorSchemaDetails("PRODUCT_VARIANT.CONFLICT_VARIANT_NAMES"),
   ]),
 });
+
+export const zApplicationError = z.object({
+  type: z.literal("application"),
+  error: zApplicationErrorUnion,
+});

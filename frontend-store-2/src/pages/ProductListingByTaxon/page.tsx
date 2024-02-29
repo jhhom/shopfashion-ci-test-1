@@ -96,7 +96,9 @@ export function ProductListingByTaxonPage() {
       />
 
       <div className="hidden py-4 md:block">
-        <p className="text-xl font-medium">T-Shirts</p>
+        <p className="text-xl font-medium">
+          {breadcrumbsQuery.data?.lastSlug?.name ?? ""}
+        </p>
       </div>
 
       <div className="md:flex md:pb-16">
@@ -106,8 +108,8 @@ export function ProductListingByTaxonPage() {
             className="mt-8"
             onSubmit={(v) => {
               navigate({
-                to: "/products/*",
-                params: { "*": taxonSlug },
+                // @ts-ignore
+                to: `/products/${taxonSlug}`,
                 search: {
                   ...search,
                   price_min: v.min,
@@ -129,10 +131,8 @@ export function ProductListingByTaxonPage() {
                 order={searchSortPrice}
                 onSetOrder={(order) => {
                   navigate({
-                    to: "/products/*",
-                    params: {
-                      "*": taxonSlug,
-                    },
+                    // @ts-ignore
+                    to: `/products/${taxonSlug}`,
                     search: {
                       ...search,
                       sort_price: order,

@@ -38,6 +38,19 @@ To run in E2E environment, run
 mvn spring-boot:run -Dspring-boot.run.arguments=--environment.e2e=true
 ```
 
+To package into JAR, run
+
+```
+./mvnw clean package -DskipTests
+```
+
+To run the JAR package on PM2, run:
+
+```
+cd backend
+pm2 start ./pm2/ecosystem.config.js
+```
+
 To run all tests:
 
 ```

@@ -1,7 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
+import { isAppError } from "~/api-contract/errors/application-errors";
 import { client } from "~/external/api-client/client";
 import { useProductDetails } from "~/pages/Products/api";
+import {
+  ResourceNotFoundErrorMessage,
+  UnexpectedErrorMessage,
+} from "~/pages/common/components/Errors";
 import { LoadingSpinnerOverlay } from "~/pages/common/components/LoadingSpinnerOverlay";
 
 export function ProductDetailsPage() {
@@ -10,6 +15,22 @@ export function ProductDetailsPage() {
   );
 
   const productDetailsQuery = useProductDetails(productId);
+
+  if (productDetailsQuery.error) {
+    if (
+      isAppError(productDetailsQuery.error) &&
+      productDetailsQuery.error.error.details.code === "RESOURCE_NOT_FOUND"
+    ) {
+      return <ResourceNotFoundErrorMessage resource="Product" />;
+    } else {
+      return (
+        <UnexpectedErrorMessage
+          intent="display product"
+          failed="load product details"
+        />
+      );
+    }
+  }
 
   if (!productDetailsQuery.data) {
     return <LoadingSpinnerOverlay />;

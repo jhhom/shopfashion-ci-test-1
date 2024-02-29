@@ -10,6 +10,7 @@ import com.example.demo.services.common.MediaService;
 import com.example.demo.services.common.exceptions.ResourceNotFoundException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Service;
@@ -136,34 +137,54 @@ public class StoreProductQueryService {
             .fetch(
                 x -> new DTO.GetOneProduct.Review(x.value4(), x.value1(), x.value2(), x.value3()));
 
-    product.associations =
-        ctx.select(
-                PRODUCT_ASSOCIATION_TYPES.ID,
-                PRODUCT_ASSOCIATION_TYPES.TYPE_NAME,
-                multisetAgg(
-                    PRODUCTS.ID,
-                    PRODUCTS.PRODUCT_NAME,
-                    PRODUCTS.PRODUCT_IMAGE_URL,
-                    PRODUCTS.PRICING))
-            .from(PRODUCT_ASSOCIATIONS)
-            .join(PRODUCT_ASSOCIATION_TYPES)
+    var associationTypeIds =
+        ctx.selectDistinct(PRODUCT_ASSOCIATION_TYPES.ID)
+            .from(PRODUCT_ASSOCIATION_TYPES)
+            .join(PRODUCT_ASSOCIATIONS)
             .on(PRODUCT_ASSOCIATIONS.PRODUCT_ASSOCIATION_TYPE_ID.eq(PRODUCT_ASSOCIATION_TYPES.ID))
-            .join(PRODUCTS)
-            .on(PRODUCTS.ID.eq(PRODUCT_ASSOCIATIONS.PRODUCT_ID))
             .where(PRODUCT_ASSOCIATIONS.PRODUCT_ID.eq(productId))
-            .groupBy(PRODUCT_ASSOCIATION_TYPES.ID)
-            .fetch(
-                v -> {
-                  var products =
-                      v.value3()
-                          .map(
-                              x ->
-                                  new DTO.GetOneProduct.AssociationProduct(
-                                      x.value1(), x.value2(), x.value3(), x.value4()));
+            .fetch(x -> x.value1());
 
-                  return new DTO.GetOneProduct.ResponseAssociation(
-                      v.value1(), v.value2(), products);
-                });
+    if (associationTypeIds.size() != 0) {
+      product.associations =
+          ctx.select(
+                  PRODUCT_ASSOCIATION_TYPES.ID,
+                  PRODUCT_ASSOCIATION_TYPES.TYPE_NAME,
+                  multisetAgg(
+                      PRODUCTS.ID,
+                      PRODUCTS.PRODUCT_NAME,
+                      PRODUCTS.PRODUCT_IMAGE_URL,
+                      PRODUCTS.PRICING))
+              .from(PRODUCT_ASSOCIATIONS)
+              .join(PRODUCT_ASSOCIATION_TYPES)
+              .on(PRODUCT_ASSOCIATIONS.PRODUCT_ASSOCIATION_TYPE_ID.eq(PRODUCT_ASSOCIATION_TYPES.ID))
+              .join(PRODUCTS)
+              .on(PRODUCTS.ID.eq(PRODUCT_ASSOCIATIONS.PRODUCT_ID))
+              .where(
+                  PRODUCT_ASSOCIATIONS
+                      .PRODUCT_ID
+                      .notEqual(productId)
+                      .and(PRODUCT_ASSOCIATION_TYPES.ID.in(associationTypeIds)))
+              .groupBy(PRODUCT_ASSOCIATION_TYPES.ID)
+              .fetch(
+                  v -> {
+                    var products =
+                        v.value3()
+                            .map(
+                                x -> {
+                                  return new DTO.GetOneProduct.AssociationProduct(
+                                      x.value1(),
+                                      x.value2(),
+                                      mediaService.mediaUrl(x.value3()),
+                                      x.value4());
+                                });
+
+                    return new DTO.GetOneProduct.ResponseAssociation(
+                        v.value1(), v.value2(), products);
+                  });
+    } else {
+      product.associations = new ArrayList<>();
+    }
 
     product.productTaxonIds =
         ctx.select(PRODUCT_TAXONS.TAXON_ID)

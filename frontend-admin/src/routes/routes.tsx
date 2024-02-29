@@ -56,6 +56,7 @@ function Root() {
 
 const rootRoute = createRootRoute({
   component: Root,
+  notFoundComponent: CatchAllPage,
 });
 
 export const loginRoute = createRoute({

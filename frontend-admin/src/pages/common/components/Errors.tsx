@@ -34,3 +34,11 @@ export function UnexpectedErrorMessages(props: {
     </div>
   );
 }
+
+export function ResourceNotFoundErrorMessage(props: { resource: string }) {
+  return (
+    <div className="w-full text-center flex justify-center items-center text-xl h-[240px] lg:h-[480px]">
+      {props.resource} not found
+    </div>
+  );
+}

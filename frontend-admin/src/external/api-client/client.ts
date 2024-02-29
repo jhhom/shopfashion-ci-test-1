@@ -1,5 +1,6 @@
 import { ApiFetcherArgs, initClient, tsRestFetchApi } from "@ts-rest/core";
 import { apiContract } from "~/api-contract/admin-api/api";
+import { zApplicationError } from "~/api-contract/errors/application-errors";
 import { config } from "~/config/config";
 
 import { storage } from "~/external/browser/use-local-storage-auth";

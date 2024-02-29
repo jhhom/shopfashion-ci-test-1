@@ -8,6 +8,7 @@ import com.example.demo.jooqmodels.enums.ProductType;
 import com.example.demo.services.common.MediaService;
 import com.example.demo.services.common.Pagination;
 import com.example.demo.services.common.Pagination.PaginationMeta;
+import com.example.demo.services.common.exceptions.ResourceNotFoundException;
 import java.math.BigDecimal;
 import java.util.List;
 import org.jooq.DSLContext;
@@ -50,51 +51,62 @@ public class AdminProductQueryService {
             .where(PRODUCT_TAXONS.PRODUCT_ID.eq(productId))
             .fetch(v -> v.value1());
 
-    return ctx.select(
-            PRODUCTS.ID,
-            PRODUCTS.PRODUCT_NAME,
-            PRODUCTS.PRODUCT_DESCRIPTION,
-            PRODUCTS.PRODUCT_TYPE,
-            PRODUCTS.TAXON_ID,
-            PRODUCTS.PRICING,
-            PRODUCTS.PRODUCT_IMAGE_URL,
-            PRODUCTS.PRODUCT_STATUS,
-            multisetAgg(PRODUCT_OPTIONS.OPTION_NAME, PRODUCT_OPTIONS.CODE))
-        .from(PRODUCTS)
-        .leftJoin(PRODUCT_CONFIGURABLE_OPTIONS)
-        .on(PRODUCT_CONFIGURABLE_OPTIONS.PRODUCT_ID.eq(PRODUCTS.ID))
-        .leftJoin(PRODUCT_OPTIONS)
-        .on(PRODUCT_OPTIONS.CODE.eq(PRODUCT_CONFIGURABLE_OPTIONS.PRODUCT_OPTION_CODE))
-        .where(PRODUCTS.ID.eq(productId))
-        .groupBy(PRODUCTS.ID)
-        .fetchOne(
-            v -> {
-              var r = new DTO.GetOneProduct.Response();
-              r.id = v.get(PRODUCTS.ID);
-              r.name = v.get(PRODUCTS.PRODUCT_NAME);
-              r.description = v.get(PRODUCTS.PRODUCT_DESCRIPTION);
-              r.mainTaxonId = v.get(PRODUCTS.TAXON_ID);
-              r.productTaxonIds = taxonIds;
-              r.status = v.get(PRODUCTS.PRODUCT_STATUS);
-              r.availableAssociations = availableAssociations;
-              r.productAssociations = productAssociations;
-              r.imageUrl = v.get(PRODUCTS.PRODUCT_IMAGE_URL);
+    var prod =
+        ctx.select(
+                PRODUCTS.ID,
+                PRODUCTS.PRODUCT_NAME,
+                PRODUCTS.PRODUCT_DESCRIPTION,
+                PRODUCTS.PRODUCT_TYPE,
+                PRODUCTS.TAXON_ID,
+                PRODUCTS.PRICING,
+                PRODUCTS.PRODUCT_IMAGE_URL,
+                PRODUCTS.PRODUCT_STATUS,
+                multisetAgg(PRODUCT_OPTIONS.OPTION_NAME, PRODUCT_OPTIONS.CODE))
+            .from(PRODUCTS)
+            .leftJoin(PRODUCT_CONFIGURABLE_OPTIONS)
+            .on(PRODUCT_CONFIGURABLE_OPTIONS.PRODUCT_ID.eq(PRODUCTS.ID))
+            .leftJoin(PRODUCT_OPTIONS)
+            .on(PRODUCT_OPTIONS.CODE.eq(PRODUCT_CONFIGURABLE_OPTIONS.PRODUCT_OPTION_CODE))
+            .where(PRODUCTS.ID.eq(productId))
+            .groupBy(PRODUCTS.ID)
+            .fetchOne(
+                v -> {
+                  var r = new DTO.GetOneProduct.Response();
+                  r.id = v.get(PRODUCTS.ID);
+                  r.name = v.get(PRODUCTS.PRODUCT_NAME);
+                  r.description = v.get(PRODUCTS.PRODUCT_DESCRIPTION);
+                  r.mainTaxonId = v.get(PRODUCTS.TAXON_ID);
+                  r.productTaxonIds = taxonIds;
+                  r.status = v.get(PRODUCTS.PRODUCT_STATUS);
+                  r.availableAssociations = availableAssociations;
+                  r.productAssociations = productAssociations;
+                  r.imageUrl = v.get(PRODUCTS.PRODUCT_IMAGE_URL);
 
-              if (r.imageUrl != null) {
-                r.imageUrl = mediaService.mediaUrl(r.imageUrl);
-              }
+                  if (r.imageUrl != null) {
+                    r.imageUrl = mediaService.mediaUrl(r.imageUrl);
+                  }
 
-              if (v.value4() == ProductType.SIMPLE) {
-                r.product = new DTO.GetOneProduct.ResponseProductSimple(v.get(PRODUCTS.PRICING));
-              } else {
-                r.product =
-                    new DTO.GetOneProduct.ResponseProductConfigurable(
-                        v.value9()
-                            .map(x -> new DTO.GetOneProduct.ProductOption(x.value2(), x.value1())));
-              }
+                  if (v.value4() == ProductType.SIMPLE) {
+                    r.product =
+                        new DTO.GetOneProduct.ResponseProductSimple(v.get(PRODUCTS.PRICING));
+                  } else {
+                    r.product =
+                        new DTO.GetOneProduct.ResponseProductConfigurable(
+                            v.value9()
+                                .map(
+                                    x ->
+                                        new DTO.GetOneProduct.ProductOption(
+                                            x.value2(), x.value1())));
+                  }
 
-              return r;
-            });
+                  return r;
+                });
+
+    if (prod == null) {
+      throw new ResourceNotFoundException("product");
+    }
+
+    return prod;
   }
 
   public DTO.ListProducts.Response listProducts(
