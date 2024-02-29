@@ -17,6 +17,7 @@ import {
   useProductDetails,
 } from "~/pages/ProductDetails/api";
 import { parseApiError } from "~/utils/api-error";
+import { useEffect } from "react";
 
 export function ProductDetailsPage() {
   const productId = Number.parseInt(
@@ -34,6 +35,10 @@ export function ProductDetailsPage() {
   const productDetailsQuery = useProductDetails(productId);
   const breadcrumbsQuery = useBreadcrumbs(productId, search.from_taxon);
   const addToCartMutation = useAddtoCart();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [productId]);
 
   if (productDetailsQuery.error) {
     const err = parseApiError(productDetailsQuery.error);
