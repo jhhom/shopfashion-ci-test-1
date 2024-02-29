@@ -98,8 +98,8 @@ function Footer() {
         <p className="mt-4">
           If you're interested, check out my other portfolio projects at{" "}
           <FooterLink
-            href="https://github.com/jhdev22"
-            text="GitHub: jhdev22"
+            href="https://github.com/jhhom"
+            text="GitHub: jhhom"
           ></FooterLink>
         </p>
 
@@ -113,7 +113,7 @@ function Footer() {
           <FooterLink href="https://sylius.com/" text="Behance" /> and websites
           like <FooterLink href="https://sylius.com/" text="Shopee" /> and{" "}
           <FooterLink href="https://sylius.com/" text="Amazon" />. All photos
-          (unless I left out any) for the sample products are taken from{" "}
+          for the sample products are taken from{" "}
           <FooterLink href="https://unsplash.com/" text="Unsplash" />.
         </p>
 
