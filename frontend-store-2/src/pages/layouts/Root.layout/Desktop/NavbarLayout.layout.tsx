@@ -1,5 +1,5 @@
 import { Toaster } from "react-hot-toast";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useClickAway } from "@uidotdev/usehooks";
 
 import { Navbar } from "~/pages/layouts/Root.layout/Desktop/Navbar";
@@ -12,7 +12,10 @@ import { Outlet, useRouter } from "@tanstack/react-router";
 import { Taxon } from "~/pages/layouts/Root.layout/types";
 import { HomePage } from "~/pages/Home/page";
 
-export function NavbarLayout({ taxonTree }: { taxonTree: Taxon[] }) {
+export function NavbarLayout({
+  taxonTree,
+  children,
+}: React.PropsWithChildren<{ taxonTree: Taxon[] }>) {
   const [openNav, setOpenNav] = useState<
     | { open: false }
     | {
@@ -27,7 +30,8 @@ export function NavbarLayout({ taxonTree }: { taxonTree: Taxon[] }) {
 
   const [navPopupHoverRef, isHoveringNavPopup] = useHover<HTMLDivElement>();
   const [navbarHoverRef, isHoveringNavbar] = useHover<HTMLDivElement>();
-  const pathname = useRouter().state.location.pathname;
+  const pathname = useRouter().state.location.href;
+  const p = window.location.href;
 
   useEffect(() => {
     if (!isHoveringNavPopup && !isHoveringNavbar) {
@@ -69,7 +73,7 @@ export function NavbarLayout({ taxonTree }: { taxonTree: Taxon[] }) {
       </div>
 
       <div id="outlet-container" className="min-h-[calc(100vh-12rem-4rem)]">
-        {pathname === "/" ? <HomePage /> : <Outlet />}
+        {children}
       </div>
       <Footer />
     </div>

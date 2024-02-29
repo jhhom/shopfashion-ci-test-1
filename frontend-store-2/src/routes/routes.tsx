@@ -1,4 +1,5 @@
 import {
+  NotFoundRoute,
   createRootRoute,
   createRoute,
   createRouter,
@@ -11,7 +12,10 @@ import { HomePage } from "~/pages/Home/page";
 
 import { RootLayout } from "~/pages/layouts/Root.layout/Root.layout";
 import { UserLoginRootLayout } from "~/pages/layouts/UserLogin.layout";
-import { ECommerceRootLayout } from "~/pages/layouts/ECommerce.layout";
+import {
+  AppRootLayout,
+  ECommerceRootLayout,
+} from "~/pages/layouts/ECommerce.layout";
 
 import { ProductListingByTaxonPage } from "~/pages/ProductListingByTaxon/page";
 import { ProductDetailsPage } from "~/pages/ProductDetails/page";
@@ -24,20 +28,13 @@ import { ThankYouPage } from "~/pages/ThankYou/page";
 import { ProfileSubpage } from "~/pages/Membership/Profile/page";
 import { PurchaseHistorySubpage } from "~/pages/Membership/PurchaseHistory/page";
 import { ProductReviewsPage } from "~/pages/ProductReviews/page";
-import { Page404Page } from "~/pages/Page404/page";
+import { Page404Page, Page404WithLayoutPage } from "~/pages/Page404/page";
 import { SearchPage } from "~/pages/Search/page";
 
 const rootRoute = createRootRoute({
-  component: RootLayout,
+  component: AppRootLayout,
+  notFoundComponent: Page404WithLayoutPage,
 });
-
-const rootRoutes = {
-  eCommerce: createRoute({
-    getParentRoute: () => rootRoute,
-    path: "/",
-    component: ECommerceRootLayout,
-  }),
-};
 
 const productListingFilterSchema = z.object({
   price_min: z.number().optional().catch(undefined),
@@ -53,13 +50,18 @@ type ProductListingFilter = z.infer<typeof productListingFilterSchema>;
 
 const routes = {
   site: {
+    home: createRoute({
+      getParentRoute: () => rootRoute,
+      path: "/",
+      component: HomePage,
+    }),
     productReviews: createRoute({
-      getParentRoute: () => rootRoutes.eCommerce,
+      getParentRoute: () => rootRoute,
       path: "/product/$productId/reviews",
       component: ProductReviewsPage,
     }),
     productDetails: createRoute({
-      getParentRoute: () => rootRoutes.eCommerce,
+      getParentRoute: () => rootRoute,
       path: "/product/$productId",
       component: ProductDetailsPage,
       validateSearch: (search: Record<string, unknown>) => {
@@ -67,7 +69,7 @@ const routes = {
       },
     }),
     productListingByTaxon: createRoute({
-      getParentRoute: () => rootRoutes.eCommerce,
+      getParentRoute: () => rootRoute,
       path: "/products/*",
       component: ProductListingByTaxonPage,
       validateSearch: (
@@ -77,7 +79,7 @@ const routes = {
       },
     }),
     search: createRoute({
-      getParentRoute: () => rootRoutes.eCommerce,
+      getParentRoute: () => rootRoute,
       path: "/search",
       component: SearchPage,
       validateSearch: (search: Record<string, unknown>): ProductSearch => {
@@ -85,43 +87,29 @@ const routes = {
       },
     }),
     shoppingCart: createRoute({
-      getParentRoute: () => rootRoutes.eCommerce,
+      getParentRoute: () => rootRoute,
       path: "/cart",
       component: ShoppingCartPage,
     }),
     membership: createRoute({
-      getParentRoute: () => rootRoutes.eCommerce,
+      getParentRoute: () => rootRoute,
       path: "/member",
       component: MembershipPage,
-      beforeLoad: async () => {
-        /*
-        const isAuthenticated = useAppStore.getState().authenticated;
-
-        // alert("MEMBER???: " + isAuthenticated);
-        useAppStore.setState({ navigateTo: "/member" });
-
-        if (!isAuthenticated) {
-          throw redirect({
-            to: "/login",
-          });
-        }
-        */
-      },
     }),
     checkout: createRoute({
-      getParentRoute: () => rootRoutes.eCommerce,
+      getParentRoute: () => rootRoute,
       path: "/checkout",
       component: CheckoutPage,
     }),
     thankyou: createRoute({
-      getParentRoute: () => rootRoutes.eCommerce,
+      getParentRoute: () => rootRoute,
       path: "/thank-you",
       component: ThankYouPage,
     }),
   },
   userLogin: {
     login: createRoute({
-      getParentRoute: () => rootRoutes.eCommerce,
+      getParentRoute: () => rootRoute,
       path: "/login",
       component: LoginPage,
       beforeLoad: async () => {
@@ -137,7 +125,7 @@ const routes = {
       },
     }),
     register: createRoute({
-      getParentRoute: () => rootRoutes.eCommerce,
+      getParentRoute: () => rootRoute,
       path: "/register",
       component: RegistrationPage,
       beforeLoad: async () => {
@@ -188,7 +176,7 @@ export const membershipSubroutes = {
 
 export const catchAllRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/*",
+  path: "*",
   component: Page404Page,
   beforeLoad: async () => {
     const isAuthenticated = useAppStore.getState().authenticated;
@@ -204,21 +192,20 @@ export const catchAllRoute = createRoute({
 
 // Create the route tree using your routes
 export const routeTree = rootRoute.addChildren([
-  rootRoutes.eCommerce.addChildren([
-    routes.site.productReviews,
-    routes.site.productListingByTaxon,
-    routes.site.productDetails,
-    routes.site.shoppingCart,
-    routes.site.search,
-    routes.site.membership.addChildren([
-      membershipSubroutes.profile,
-      membershipSubroutes.purchaseHistory,
-    ]),
-    routes.site.checkout,
-    routes.site.thankyou,
-    routes.userLogin.login,
-    routes.userLogin.register,
+  routes.site.home,
+  routes.site.productReviews,
+  routes.site.productListingByTaxon,
+  routes.site.productDetails,
+  routes.site.shoppingCart,
+  routes.site.search,
+  routes.site.membership.addChildren([
+    membershipSubroutes.profile,
+    membershipSubroutes.purchaseHistory,
   ]),
+  routes.site.checkout,
+  routes.site.thankyou,
+  routes.userLogin.login,
+  routes.userLogin.register,
   catchAllRoute,
 ]);
 

@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 
 import {
   IconFavourite,
@@ -14,18 +14,18 @@ import { Navbar } from "~/pages/layouts/Root.layout/Mobile/Navbar";
 import { Taxon } from "~/pages/layouts/Root.layout/types";
 
 import { FooterLink } from "~/pages/layouts/Root.layout/Desktop/NavbarLayout.layout";
-import { HomePage } from "~/pages/Home/page";
 
-export function NavbarLayout({ taxonTree }: { taxonTree: Taxon[] }) {
+export function NavbarLayout({
+  taxonTree,
+  children,
+}: React.PropsWithChildren<{ taxonTree: Taxon[] }>) {
   const [openMobileSidebar, setOpenMobileSidebar] = useState(false);
   const pathname = useRouter().state.location.pathname;
 
   return (
     <div>
       <Navbar onOpenSidebar={() => setOpenMobileSidebar(true)} />
-      <div className="min-h-[calc(100vh-4rem-8rem)] pt-16">
-        {pathname === "/" ? <HomePage /> : <Outlet />}
-      </div>
+      <div className="min-h-[calc(100vh-4rem-8rem)] pt-16">{children}</div>
       <Footer />
       <NavigationButtons />
       <MobileSidebar

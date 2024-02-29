@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
-import { useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { client } from "~/external/api-client/client";
 import { useLocalStorageAuth } from "~/external/browser/local-storage/use-auth.hook";
@@ -9,7 +9,7 @@ import { useAutoLoginWithToken } from "~/pages/layouts/Root.layout/use-auto-logi
 import { useAppStore } from "~/stores/stores";
 
 // Create a root route
-export function RootLayout() {
+export function RootLayout(props: React.PropsWithChildren) {
   const store = useAppStore();
   const authStorage = useLocalStorageAuth();
 
@@ -32,7 +32,7 @@ export function RootLayout() {
 
   return (
     <>
-      <Outlet />
+      {props.children}
       <Toaster />
     </>
   );
