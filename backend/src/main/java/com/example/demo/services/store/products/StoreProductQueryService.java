@@ -284,7 +284,7 @@ public class StoreProductQueryService {
                 PRODUCTS.PRODUCT_IMAGE_URL,
                 PRODUCTS.PRODUCT_TYPE,
                 coalesce(avg(PRODUCT_REVIEWS.RATING), 0),
-                count(PRODUCT_REVIEWS.ORDER_ID),
+                countDistinct(PRODUCT_REVIEWS.ORDER_ID),
                 min(PRODUCT_VARIANTS.PRICING).as("min_price"),
                 max(PRODUCT_VARIANTS.PRICING).as("max_price"))
             .from(PRODUCTS)
@@ -347,7 +347,7 @@ public class StoreProductQueryService {
                 PRODUCTS.PRODUCT_IMAGE_URL,
                 PRODUCTS.PRODUCT_TYPE,
                 coalesce(avg(PRODUCT_REVIEWS.RATING), 0),
-                count(PRODUCT_REVIEWS.ORDER_ID),
+                countDistinct(PRODUCT_REVIEWS.ORDER_ID),
                 min(PRODUCT_VARIANTS.PRICING).as("min_price"),
                 max(PRODUCT_VARIANTS.PRICING).as("max_price"))
             .from(PRODUCTS)

@@ -6,7 +6,7 @@ import {
   useRouter,
 } from "@tanstack/react-router";
 import { clsx as cx } from "clsx";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { IconBurgerMenu } from "~/pages/common/Icons";
 import toast, { Toaster } from "react-hot-toast";
@@ -23,6 +23,7 @@ import { DashboardPage } from "~/pages/Home/Dashboard/page";
 
 export function HomePage() {
   const [openSidebar, setOpenSidebar] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
   const pathname = useRouter().state.location.pathname;
@@ -48,6 +49,10 @@ export function HomePage() {
       verifyTokenMutation.mutate();
     }
   }, []);
+
+  useEffect(() => {
+    contentRef.current?.scrollTo(0, 0);
+  }, [pathname]);
 
   // if user is logged-out
   if (user === null) {
@@ -107,7 +112,10 @@ export function HomePage() {
               <IconBurgerMenu />
             </button>
           </div>
-          <div className="relative h-[calc(100vh-2.5rem)] w-full overflow-y-auto bg-gray-50 px-5 pt-5">
+          <div
+            ref={contentRef}
+            className="relative h-[calc(100vh-2.5rem)] w-full overflow-y-auto bg-gray-50 px-5 pt-5"
+          >
             <Breadcrumb />
             <div className="mt-4">
               {pathname === "/" ? <DashboardPage /> : <Outlet />}

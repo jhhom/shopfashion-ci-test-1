@@ -13,10 +13,11 @@ export function ProductReviews(props: {
   productId: number;
   marginTop?: string;
   reviews: ProductReview[];
+  numberOfReviews: number;
 }) {
   return (
     <div className={cx(props.marginTop)}>
-      <h2 className="text-xl font-medium">Reviews ({props.reviews.length})</h2>
+      <h2 className="text-xl font-medium">Reviews ({props.numberOfReviews})</h2>
       {props.reviews.length > 0 ? (
         <div className="mt-4 space-y-4">
           {props.reviews.length > 3
@@ -42,7 +43,7 @@ export function ProductReviews(props: {
       ) : (
         <p className="mt-2">There are not reviews yet for this product</p>
       )}
-      {props.reviews.length > 3 && (
+      {props.numberOfReviews > 3 && (
         <div className="mt-4 flex justify-center">
           <Link
             to="/product/$productId/reviews"

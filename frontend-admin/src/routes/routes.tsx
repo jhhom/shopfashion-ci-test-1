@@ -1,4 +1,4 @@
-import { Outlet, Router } from "@tanstack/react-router";
+import { Outlet, Router, useRouter } from "@tanstack/react-router";
 import { Toaster } from "react-hot-toast";
 import { HomePage } from "~/pages/Home/layout";
 import { ProductsPage } from "~/pages/Products/layout";
@@ -43,6 +43,7 @@ import {
   createRootRoute,
   createRouter,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 // Create a root route
 function Root() {

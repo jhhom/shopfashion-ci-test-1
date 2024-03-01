@@ -45,6 +45,7 @@ async function seedDatabase(db: KyselyDB) {
     "customers",
     "admins",
     "productAssociations",
+    "productAssociationTypes",
   ];
 
   for (const t of tableToTruncate) {

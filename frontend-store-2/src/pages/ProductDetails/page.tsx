@@ -115,6 +115,7 @@ export function ProductDetailsPage() {
               marginTop="mt-8"
               productId={productId}
               reviews={productDetailsQuery.data.first3Reviews}
+              numberOfReviews={productDetailsQuery.data.numberOfReviews}
             />
           ) : (
             <LoadingSpinner />

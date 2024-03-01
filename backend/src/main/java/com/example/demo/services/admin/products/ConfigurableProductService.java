@@ -172,20 +172,33 @@ public class ConfigurableProductService {
 
     ctx.delete(PRODUCT_ASSOCIATIONS).where(PRODUCT_ASSOCIATIONS.PRODUCT_ID.eq(productId)).execute();
 
-    if (req.productAssociations.size() != 0) {
+    System.out.println("🔥 1 UPDATE PRODUCT ASSOCIATIONS");
 
+    if (req.productAssociations.size() != 0) {
       var batch =
           ctx.batch(
-              ctx.insertInto(
-                  PRODUCT_ASSOCIATIONS,
-                  PRODUCT_ASSOCIATIONS.PRODUCT_ID,
-                  PRODUCT_ASSOCIATIONS.PRODUCT_ASSOCIATION_TYPE_ID));
+                  ctx.insertInto(
+                      PRODUCT_ASSOCIATIONS,
+                      PRODUCT_ASSOCIATIONS.PRODUCT_ID,
+                      PRODUCT_ASSOCIATIONS.PRODUCT_ASSOCIATION_TYPE_ID).values((Integer) null, null))
+              ;
 
       for (var associationId : req.productAssociations) {
+        System.out.println("BIND PRODUCT ID: " + productId + ", ASSC ID: " + associationId);
         batch.bind(productId, associationId);
+        System.out.println("BIND??");
+      }
+      try {
+        System.out.println("✅ SQL: " + batch);
+      } catch (RuntimeException ex) {
+        System.out.println("PRINT EXCEPTION: " + ex);
+        throw ex;
       }
       batch.execute();
     }
+
+    System.out.println("🔥 2 UPDATE PRODUCT ASSCS COMPLETE");
+
     return new ResultMessage("Product updated successfully");
   }
 

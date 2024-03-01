@@ -40,6 +40,7 @@ public class AdminProductQueryService {
             .from(PRODUCT_ASSOCIATIONS)
             .join(PRODUCT_ASSOCIATION_TYPES)
             .on(PRODUCT_ASSOCIATIONS.PRODUCT_ASSOCIATION_TYPE_ID.eq(PRODUCT_ASSOCIATION_TYPES.ID))
+            .where(PRODUCT_ASSOCIATIONS.PRODUCT_ID.eq(productId))
             .fetch(
                 v -> {
                   return new DTO.GetOneProduct.ProductAssociation(v.value1(), v.value2());
