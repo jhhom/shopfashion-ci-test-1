@@ -1,19 +1,10 @@
 package com.example.demo.services.store.customers.checkout;
 
-import static com.example.demo.jooqmodels.Tables.*;
-import static org.jooq.impl.DSL.*;
-
-import com.example.demo.jackson.Mapper;
-import com.example.demo.jooqmodels.enums.OrderLineItemStatus;
-import com.example.demo.jooqmodels.enums.OrderStatus;
-import com.example.demo.jooqmodels.enums.ProductStatus;
 import com.example.demo.logging.ApplicationLogger;
 import com.example.demo.logging.Log;
 import com.example.demo.logging.RequestId;
 import com.example.demo.repositories.RequestCheckoutRepository;
 import com.example.demo.services.store.PaymentService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -21,10 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 import org.jooq.DSLContext;
-import org.jooq.JSONB;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -112,7 +100,8 @@ public class RequestCheckoutService {
                   put("success_redirect_url", successRedirectUrl);
                   put("timestamp", timestamp.format(DateTimeFormatter.ISO_DATE_TIME));
                 }
-              }));
+              }),
+          "payment session created");
     }
   }
 

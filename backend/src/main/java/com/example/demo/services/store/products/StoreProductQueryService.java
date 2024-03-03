@@ -5,24 +5,32 @@ import static org.jooq.impl.DSL.*;
 
 import com.example.demo.jooqmodels.enums.ProductStatus;
 import com.example.demo.jooqmodels.enums.ProductType;
+import com.example.demo.logging.ApplicationLogger;
+import com.example.demo.logging.Log;
+import com.example.demo.logging.RequestId;
 import com.example.demo.services.admin.taxon.TaxonUtil;
 import com.example.demo.services.common.MediaService;
 import com.example.demo.services.common.exceptions.ResourceNotFoundException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.jooq.DSLContext;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StoreProductQueryService {
   private final DSLContext ctx;
   private final MediaService mediaService;
+  private final StoreProductQueryLogger logger;
 
-  public StoreProductQueryService(DSLContext ctx, MediaService mediaService) {
+  public StoreProductQueryService(
+      DSLContext ctx, MediaService mediaService, StoreProductQueryLogger logger) {
     this.ctx = ctx;
     this.mediaService = mediaService;
+    this.logger = logger;
   }
 
   public List<DTO.GetLatestProducts.Product> getLatestProducts() {
@@ -258,6 +266,8 @@ public class StoreProductQueryService {
 
   public DTO.ListProductsByTaxonSlug.Response listProductsByTaxonSlug(
       DSLContext ctx, String taxonSlug, DTO.ListProductsByTaxonSlug.Query query) {
+    long startTimeNano = System.nanoTime();
+
     var taxonItems =
         ctx.select(TAXONS.ID, TAXONS.PARENT_ID, TAXONS.TAXON_NAME, TAXONS.SLUG)
             .from(TAXONS)
@@ -272,8 +282,6 @@ public class StoreProductQueryService {
     if (taxon.isEmpty()) {
       throw new ResourceNotFoundException("taxon");
     }
-
-    System.out.println("SORT ORDER '" + query.sortPriceOrder + "'");
 
     var productsWithMatchingMainTaxonQuery =
         ctx.select(
@@ -442,7 +450,34 @@ public class StoreProductQueryService {
       }
     }
 
+    long endTimeNano = System.nanoTime();
+    this.logger.logListProductsDuration(startTimeNano, endTimeNano);
+
     return new DTO.ListProductsByTaxonSlug.Response(taxon.get().taxonName, products);
+  }
+
+  @Component
+  public static class StoreProductQueryLogger {
+    private final ApplicationLogger logger;
+    private final RequestId requestId;
+
+    public StoreProductQueryLogger(ApplicationLogger logger, RequestId requestId) {
+      this.logger = logger;
+      this.requestId = requestId;
+    }
+
+    public void logListProductsDuration(long startTimeNanoSecs, long endTimeNanoSecs) {
+      long durationMiliSecs = (endTimeNanoSecs - startTimeNanoSecs) / 1_000_000;
+      logger.log(
+          new Log.InfoCustom(
+              requestId,
+              new HashMap<>() {
+                {
+                  put("duration_ms", durationMiliSecs);
+                }
+              }),
+          "duration taken to retrieve product list");
+    }
   }
 
   public static class DTO {

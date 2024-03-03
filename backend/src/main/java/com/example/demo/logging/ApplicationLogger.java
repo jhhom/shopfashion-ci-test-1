@@ -37,7 +37,7 @@ public class ApplicationLogger {
 
   public void log(Log.InfoMethodArgumentInvalidException argInvalidLog) {
     logger
-        .atInfo()
+        .atWarn()
         .addKeyValue("application_log", true)
         .addKeyValue("info", argInvalidLog)
         .log("http invalid argument");
@@ -53,18 +53,34 @@ public class ApplicationLogger {
 
   public void log(Log.InfoUnexpectedException unexpectedExceptionLog) {
     logger
-        .atInfo()
+        .atError()
         .addKeyValue("application_log", true)
         .addKeyValue("info", unexpectedExceptionLog)
         .log("unexpected exception");
   }
 
   // custom log for business event
-  public void log(Log.InfoCustom customLog) {
+  public void log(Log.InfoCustom customLog, String message) {
     logger
         .atInfo()
         .addKeyValue("application_log", true)
         .addKeyValue("info", customLog)
-        .log("custom log");
+        .log(message);
+  }
+
+  public void log(Log.InfoCustom customLog, String message, boolean debug) {
+    if (debug) {
+      logger
+          .atDebug()
+          .addKeyValue("application_log", true)
+          .addKeyValue("info", customLog)
+          .log(message);
+    } else {
+      logger
+          .atInfo()
+          .addKeyValue("application_log", true)
+          .addKeyValue("info", customLog)
+          .log(message);
+    }
   }
 }
