@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Taxon } from "@api-contract/common";
+import { Taxon } from "~/api-contract/common";
 
 type Navigation = {
   category: string;

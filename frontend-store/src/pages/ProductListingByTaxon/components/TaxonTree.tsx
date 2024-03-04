@@ -25,8 +25,6 @@ export function TaxonTree(props: { taxons: TaxonProps[] }) {
           children={t.children}
         />
       ))}
-
-
     </div>
   );
 }
@@ -52,12 +50,8 @@ function Taxon(props: TaxonProps) {
       {expand && (
         <div className="mt-2 space-y-2 pl-2 text-[0.8rem]">
           {props.children.map((c) => (
-            <Link
-              className="block"
-              to="/products/*"
-              params={{ "*": c.slug }}
-              key={c.slug}
-            >
+            // @ts-expect-error
+            <Link className="block" to={`/products/${c.slug}`} key={c.slug}>
               {c.taxonName}
             </Link>
           ))}

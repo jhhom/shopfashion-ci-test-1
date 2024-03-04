@@ -1,19 +1,16 @@
-// Imports
-// ========================================================
 import React from "react";
 import ReactDOM from "react-dom/client";
-import RootProvider from "./providers";
-import App from "./App";
 
+import RootProvider from "~/providers/index.tsx";
+
+import App from "./App.tsx";
 import "./index.css";
 import "@smastrom/react-rating/style.css";
 
-// Render
-// ========================================================
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RootProvider>
       <App />
     </RootProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

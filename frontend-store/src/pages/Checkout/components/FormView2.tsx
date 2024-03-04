@@ -1,6 +1,7 @@
 import { clsx as cx } from "clsx";
 import { useLayoutEffect, useRef, useState } from "react";
 import { DeliveryFormSchema } from "~/pages/Checkout/components/delivery-form";
+import { formatPrice } from "~/utils/utils";
 
 export type OrderSummary = {
   itemsSubtotal: number;
@@ -80,21 +81,21 @@ function OrderSummary(props: {
       <div className="px-3 py-4">
         <div className="flex justify-between text-sm">
           <p>Item(s) subtotal</p>
-          <p>RM {props.orderSummary.itemsSubtotal}</p>
+          <p>RM {formatPrice(props.orderSummary.itemsSubtotal)}</p>
         </div>
         <div className="mt-2 flex justify-between text-sm">
           <p>Shipping</p>
-          <p>RM {props.orderSummary.shippingFee}</p>
+          <p>RM {formatPrice(props.orderSummary.shippingFee)}</p>
         </div>
         <hr className="my-3.5 border-gray-300" />
         <div className="mt-2 flex justify-between text-sm">
           <p className="font-semibold">SUBTOTAL</p>
-          <p>RM {props.orderSummary.itemsSubtotal}</p>
+          <p>RM {formatPrice(props.orderSummary.itemsSubtotal)}</p>
         </div>
         <hr className="my-3.5 border-gray-300" />
         <div className="mt-2 flex justify-between text-sm">
           <p className="font-semibold">ORDER TOTAL</p>
-          <p>RM {props.orderSummary.orderTotal}</p>
+          <p>RM {formatPrice(props.orderSummary.orderTotal)}</p>
         </div>
       </div>
       <div className="mt-4 px-3">
@@ -115,7 +116,7 @@ function DemoNote(props: { marginTop?: string }) {
     <div
       className={cx(
         "animate-tada rounded-md border border-yellow-400 bg-yellow-100 px-4 py-2.5 text-sm",
-        props.marginTop,
+        props.marginTop
       )}
     >
       <div className="flex items-center">

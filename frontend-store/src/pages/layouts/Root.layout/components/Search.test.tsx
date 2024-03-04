@@ -4,11 +4,12 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { setupServer } from "msw/node";
 import { http, HttpResponse } from "msw";
-import { config } from "~/shared/config/config";
 import { client } from "~/external/api-client/client";
-import "@testing-library/jest-dom/vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Search } from "~/pages/layouts/Root.layout/components/Search";
+import { config } from "~/config/config";
+
+import "@testing-library/jest-dom/vitest";
 
 const products = Array.from(
   new Set([
@@ -74,15 +75,17 @@ function filterProducts(searchTerm: string) {
   return products.filter((p) => p.toLowerCase().includes(searchTerm));
 }
 
-
 export const handlers = [
   // Intercept the "GET /resource" request.
-  http.get(`${config.SERVER_URL}/store/search_product_autocomplete/:searchTerm`, ({ params }) => {
-    // And respond with a "text/plain" response
-    // with a "Hello world!" text response body.
+  http.get(
+    `${config.SERVER_URL}/store/search_product_autocomplete/:searchTerm`,
+    ({ params }) => {
+      // And respond with a "text/plain" response
+      // with a "Hello world!" text response body.
       const searchTerm = params.searchTerm as string;
-    return HttpResponse.json({ productNames: filterProducts(searchTerm) });
-  }),
+      return HttpResponse.json({ productNames: filterProducts(searchTerm) });
+    }
+  ),
 ];
 const server = setupServer(...handlers);
 
@@ -90,14 +93,16 @@ beforeAll(() => {
   server.listen();
 });
 
-test('test search mock api req', async () => {
-  const r = await client.products.searchProductAutocomplete({ params: { searchTerm: 'h'}})
+test("test search mock api req", async () => {
+  const r = await client.products.searchProductAutocomplete({
+    params: { searchTerm: "h" },
+  });
   if (r.status == 200) {
-    console.log(r.body)
+    console.log(r.body);
   }
-})
+});
 
-test('search test', async () => {
+test("search test", async () => {
   const client = new QueryClient();
   render(
     <QueryClientProvider client={client}>
@@ -118,4 +123,4 @@ test('search test', async () => {
     // const el = screen.getAllByText("ans")[0];
     // expect(el).toBeInTheDocument();
   });
-})
+});

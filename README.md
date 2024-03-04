@@ -28,7 +28,7 @@ pnpm run build
 ```
 
 ```
-cd frontend-store-2
+cd frontend-store
 pnpm run build
 ```
 
@@ -87,7 +87,7 @@ pnpm run build
 ```
 
 ```
-cd frontend-store-2
+cd frontend-store
 pnpm run build
 ```
 

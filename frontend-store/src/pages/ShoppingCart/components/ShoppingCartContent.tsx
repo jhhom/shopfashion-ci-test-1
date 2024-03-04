@@ -1,8 +1,7 @@
-import { ProductStatus } from "@api-contract/common";
+import { ProductStatus } from "~/api-contract/common";
 import { Link } from "@tanstack/react-router";
 import { MissingProductImage } from "~/pages/common/ErrorContents";
 import { IconClose } from "~/pages/common/Icons";
-import { Breadcrumb, breadcrumb } from "~/pages/common/components/Breadcrumb";
 import { QuantityInputSmall } from "~/pages/common/components/QuantityInput";
 
 import { clsx as cx } from "clsx";
@@ -172,7 +171,7 @@ function CartWithItems(props: {
                 {
                   "cursor-not-allowed bg-teal-500/50":
                     purchasedItems.length === 0,
-                },
+                }
               )}
             >
               Checkout

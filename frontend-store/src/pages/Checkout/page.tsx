@@ -5,7 +5,6 @@ import { client } from "~/external/api-client/client";
 import { stripePromise } from "~/external/stripe/stripe";
 
 import { DeliveryFormSchema } from "~/pages/Checkout/components/delivery-form";
-import { Breadcrumb, breadcrumb } from "~/pages/common/components/Breadcrumb";
 import { OrderSummaryType } from "~/pages/Checkout/components/components";
 import { OrderSummary } from "~/pages/Checkout/components/OrderSummary";
 import { FormView1 } from "~/pages/Checkout/components/FormView1";
@@ -91,8 +90,8 @@ export function CheckoutPage() {
           )}
         </div>
       </div>
-      {requestCheckoutSessionMutation.isLoading ||
-        (checkoutInfoQuery.isLoading && <LoadingSpinner />)}
+      {requestCheckoutSessionMutation.isPending ||
+        (checkoutInfoQuery.isPending && <LoadingSpinner />)}
     </div>
   );
 }

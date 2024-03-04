@@ -1,7 +1,7 @@
 import {
   StoreCustomersRequests,
   StoreProductsRequests,
-} from "@api-contract/store-api/api";
+} from "~/api-contract/store-api/api";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { client } from "~/external/api-client/client";
 import { QUERY_KEY } from "~/pages/ProductListingByTaxon/query";
@@ -14,7 +14,7 @@ export function useRegister({ onError }: { onError: () => void }) {
 
   return useMutation({
     mutationFn: async (
-      credentials: StoreProductsRequests["registerCustomer"]["body"],
+      credentials: StoreProductsRequests["registerCustomer"]["body"]
     ) => {
       const r = await client.products.registerCustomer({
         body: credentials,

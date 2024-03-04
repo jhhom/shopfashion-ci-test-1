@@ -9,8 +9,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "./src/"),
-      "@api-contract": path.resolve(__dirname, "./src/shared/api-contract"),
-      "@config": path.resolve(__dirname, "./src/shared/config"),
+      "@api-contract": path.resolve(__dirname, "./src/api-contract"),
+      "@config": path.resolve(__dirname, "./src/config"),
     },
   },
 });

@@ -1,8 +1,8 @@
 import { ApiFetcherArgs, initClient, tsRestFetchApi } from "@ts-rest/core";
-import { apiContract } from "~/shared/api-contract/store-api/api";
-import { config } from "@config/config";
+import { apiContract } from "~/api-contract/store-api/api";
 
 import { authStorage } from "~/external/browser/local-storage/auth";
+import { config } from "~/config/config";
 
 export const client = initClient(apiContract, {
   baseUrl: config.SERVER_URL,
@@ -26,7 +26,7 @@ export const client = initClient(apiContract, {
     if (!(r.status == 200 || r.status == 201)) {
       console.log(
         "%c >>> Error calling API",
-        "background-color: red; color: white;",
+        "background-color: red; color: white;"
       );
       console.log("Error calling API:", args.path);
       console.log("Query", args.rawQuery);
@@ -35,12 +35,12 @@ export const client = initClient(apiContract, {
       console.log(r.body);
       console.log(
         "%c ---------------------------------------",
-        "background-color: blue; color: white;",
+        "background-color: blue; color: white;"
       );
     } else {
       console.log(
         "%c >>> API Call success",
-        "background-color: darkgreen; color: white;",
+        "background-color: darkgreen; color: white;"
       );
       console.log("API:", args.path);
       console.log("Query", args.rawQuery);
@@ -49,7 +49,7 @@ export const client = initClient(apiContract, {
       console.log(r.body);
       console.log(
         "%c ---------------------------------------",
-        "background-color: blue; color: white;",
+        "background-color: blue; color: white;"
       );
     }
 

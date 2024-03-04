@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { client } from "~/external/api-client/client";
 import { useQuery } from "@tanstack/react-query";
-import { StoreProductsResponse } from "~/shared/api-contract/store-api/api";
+import { StoreProductsResponse } from "~/api-contract/store-api/api";
 import { Link } from "@tanstack/react-router";
 import { IconMinus, IconPlus } from "~/pages/common/Icons";
 import { ProductListingItem } from "~/pages/ProductListingByTaxon/page";
@@ -94,9 +94,9 @@ function CategoryButton(props: {
               <ul className="mt-2 space-y-2 pl-4 text-sm">
                 {c.children.map((_c) => (
                   <Link
-                    to="/products/*"
+                    // @ts-expect-error
+                    to={`/products/${_c.slug}`}
                     className="block"
-                    params={{ "*": _c.slug }}
                     key={_c.id}
                   >
                     {_c.taxonName}

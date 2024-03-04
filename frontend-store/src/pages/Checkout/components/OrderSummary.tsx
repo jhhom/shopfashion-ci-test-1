@@ -1,5 +1,6 @@
 import { MissingProductImage } from "~/pages/common/ErrorContents";
 import { IconShirt } from "~/pages/common/Icons";
+import { formatPrice } from "~/utils/utils";
 
 export type OrderSummary = {
   itemsSubtotal: number;
@@ -27,21 +28,21 @@ export function OrderSummary(props: {
         <div className="mt-4 space-y-2 text-sm">
           <div className="flex justify-between">
             <p>Item(s) subtotal</p>
-            <p>RM {props.orderSummary.subtotal}</p>
+            <p>RM {formatPrice(props.orderSummary.subtotal)}</p>
           </div>
           <div className="flex justify-between">
             <p>Shipping</p>
-            <p>RM {props.orderSummary.shippingFee}</p>
+            <p>RM {formatPrice(props.orderSummary.shippingFee)}</p>
           </div>
         </div>
         <div className="mt-6 space-y-3 font-semibold uppercase">
           <div className="flex justify-between">
             <p>SUBTOTAL</p>
-            <p>RM {props.orderSummary.subtotal}</p>
+            <p>RM {formatPrice(props.orderSummary.subtotal)}</p>
           </div>
           <div className="flex justify-between">
             <p>ORDER TOTAL</p>
-            <p>RM {props.orderSummary.orderTotal}</p>
+            <p>RM {formatPrice(props.orderSummary.orderTotal)}</p>
           </div>
         </div>
       </div>

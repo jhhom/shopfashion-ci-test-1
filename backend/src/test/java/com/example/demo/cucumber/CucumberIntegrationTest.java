@@ -15,5 +15,5 @@ import org.springframework.http.HttpStatusCode;
 @RunWith(Cucumber.class)
 @CucumberOptions(
     features = "src/test/resources/features",
-    plugin = {"pretty", "html:target/cucumber/bagbasics"})
+    plugin = {"pretty", "html:target/cucumber/shopfashion"})
 public class CucumberIntegrationTest {}

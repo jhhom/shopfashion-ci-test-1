@@ -1,5 +1,4 @@
-import { Breadcrumb, breadcrumb } from "~/pages/common/components/Breadcrumb";
-import { clsx as cx } from "clsx";
+import { Breadcrumb } from "~/pages/common/components/Breadcrumb";
 import { Link, useParams, useSearch } from "@tanstack/react-router";
 import { useLocalStorageShoppingCart } from "~/external/browser/local-storage/use-shopping-cart.hook";
 import { useLocalStorageAuth } from "~/external/browser/local-storage/use-auth.hook";
@@ -18,23 +17,28 @@ import {
   useProductDetails,
 } from "~/pages/ProductDetails/api";
 import { parseApiError } from "~/utils/api-error";
+import { useEffect } from "react";
 
 export function ProductDetailsPage() {
   const productId = Number.parseInt(
     useParams({
-      from: "/e-commerce/product/$productId",
-    }).productId,
+      from: "/product/$productId",
+    }).productId
   );
 
   const shoppingCart = useLocalStorageShoppingCart();
 
-  const search = useSearch({ from: "/e-commerce/product/$productId" });
+  const search = useSearch({ from: "/product/$productId" });
 
   const { token } = useLocalStorageAuth();
 
   const productDetailsQuery = useProductDetails(productId);
   const breadcrumbsQuery = useBreadcrumbs(productId, search.from_taxon);
   const addToCartMutation = useAddtoCart();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [productId]);
 
   if (productDetailsQuery.error) {
     const err = parseApiError(productDetailsQuery.error);
@@ -57,12 +61,7 @@ export function ProductDetailsPage() {
               ? breadcrumbsQuery.data.crumbs.map((c) => ({
                   id: c.id,
                   name: c.name,
-                  link: {
-                    to: "/products/*",
-                    params: {
-                      "*": c.slug,
-                    },
-                  },
+                  link: `/products/${c.slug}`,
                 }))
               : []
           }
@@ -116,6 +115,7 @@ export function ProductDetailsPage() {
               marginTop="mt-8"
               productId={productId}
               reviews={productDetailsQuery.data.first3Reviews}
+              numberOfReviews={productDetailsQuery.data.numberOfReviews}
             />
           ) : (
             <LoadingSpinner />

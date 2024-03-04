@@ -17,5 +17,5 @@ export const useAppStore = create(
     ...createAuthSlice(...a),
     ...createAfterLoginNavigationSlice(...a),
     ...createAttemptToCheckoutWhileLoggedOutSlice(...a),
-  })),
+  }))
 );

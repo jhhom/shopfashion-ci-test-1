@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 
 import {
   IconFavourite,
@@ -7,7 +7,7 @@ import {
 } from "~/pages/common/Icons";
 
 import { clsx as cx } from "clsx";
-import { Link, MakeLinkOptions, Outlet } from "@tanstack/react-router";
+import { Link, LinkProps, Outlet, useRouter } from "@tanstack/react-router";
 
 import { MobileSidebar } from "~/pages/layouts/Root.layout/Mobile/MobileSidebar";
 import { Navbar } from "~/pages/layouts/Root.layout/Mobile/Navbar";
@@ -15,15 +15,17 @@ import { Taxon } from "~/pages/layouts/Root.layout/types";
 
 import { FooterLink } from "~/pages/layouts/Root.layout/Desktop/NavbarLayout.layout";
 
-export function NavbarLayout({ taxonTree }: { taxonTree: Taxon[] }) {
+export function NavbarLayout({
+  taxonTree,
+  children,
+}: React.PropsWithChildren<{ taxonTree: Taxon[] }>) {
   const [openMobileSidebar, setOpenMobileSidebar] = useState(false);
+  const pathname = useRouter().state.location.pathname;
 
   return (
     <div>
       <Navbar onOpenSidebar={() => setOpenMobileSidebar(true)} />
-      <div className="min-h-[calc(100vh-4rem-8rem)] pt-16">
-        <Outlet />
-      </div>
+      <div className="min-h-[calc(100vh-4rem-8rem)] pt-16">{children}</div>
       <Footer />
       <NavigationButtons />
       <MobileSidebar
@@ -44,11 +46,15 @@ function NavigationButtons() {
           to="/member"
           text="Membership"
           icon={<IconPerson className="h-5 w-5 text-gray-500" />}
+          search={{}}
+          params={{}}
         />
         <NavigationButton
           text="Shopping Cart"
           icon={<IconShoppingCart className="h-5 w-5 text-gray-500" />}
           to="/cart"
+          search={{}}
+          params={{}}
         />
       </div>
     </div>
@@ -60,12 +66,12 @@ function NavigationButton({
   icon,
   className,
   ...props
-}: { text: string; icon: JSX.Element } & MakeLinkOptions) {
+}: { text: string; icon: JSX.Element } & LinkProps) {
   return (
     <Link
       className={cx(
         "block h-full basis-1/2 border-r text-center text-sm text-gray-600 last:border-r-0",
-        className,
+        className
       )}
       {...props}
     >
@@ -92,8 +98,8 @@ function Footer() {
         <p className="mt-4">
           If you're interested, check out my other portfolio projects at{" "}
           <FooterLink
-            href="https://github.com/jhdev22"
-            text="GitHub: jhdev22"
+            href="https://github.com/jhhom"
+            text="GitHub: jhhom"
           ></FooterLink>
         </p>
 
@@ -107,7 +113,7 @@ function Footer() {
           <FooterLink href="https://sylius.com/" text="Behance" /> and websites
           like <FooterLink href="https://sylius.com/" text="Shopee" /> and{" "}
           <FooterLink href="https://sylius.com/" text="Amazon" />. All photos
-          (unless I left out any) for the sample products are taken from{" "}
+          for the sample products are taken from{" "}
           <FooterLink href="https://unsplash.com/" text="Unsplash" />.
         </p>
 

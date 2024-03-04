@@ -17,6 +17,7 @@ export function useAutoLoginDebug() {
       authStorage.setToken(token);
       store.setAuthenticated(true);
       if (store.navigateTo !== null) {
+        // @ts-ignore
         navigate({ to: store.navigateTo, replace: true });
       } else if (router.state.location.pathname === "/login") {
         navigate({ to: "/" });

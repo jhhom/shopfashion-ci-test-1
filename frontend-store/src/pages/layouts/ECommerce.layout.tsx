@@ -8,8 +8,19 @@ import { NavbarLayout as DesktopNavbarLayout } from "~/pages/layouts/Root.layout
 import { NavbarLayout as MobileNavbarLayout } from "~/pages/layouts/Root.layout/Mobile/NavbarLayout.layout";
 import { LoadingSpinner } from "~/pages/Checkout/components/LoadingSpinner";
 import { useTaxonTree } from "~/pages/layouts/api";
+import { RootLayout } from "~/pages/layouts/Root.layout/Root.layout";
+import { Outlet } from "@tanstack/react-router";
+import React from "react";
 
-export function ECommerceRootLayout() {
+export function AppRootLayout() {
+  return (
+    <ECommerceRootLayout>
+      <Outlet />
+    </ECommerceRootLayout>
+  );
+}
+
+export function ECommerceRootLayout(props: React.PropsWithChildren) {
   const taxonTreeQuery = useTaxonTree();
 
   if (taxonTreeQuery.isError) {
@@ -21,13 +32,17 @@ export function ECommerceRootLayout() {
   }
 
   return (
-    <>
+    <RootLayout>
       <div className="hidden md:block">
-        <DesktopNavbarLayout taxonTree={taxonTreeQuery.data} />
+        <DesktopNavbarLayout taxonTree={taxonTreeQuery.data}>
+          {props.children}
+        </DesktopNavbarLayout>
       </div>
       <div className="md:hidden">
-        <MobileNavbarLayout taxonTree={taxonTreeQuery.data} />
+        <MobileNavbarLayout taxonTree={taxonTreeQuery.data}>
+          {props.children}
+        </MobileNavbarLayout>
       </div>
-    </>
+    </RootLayout>
   );
 }

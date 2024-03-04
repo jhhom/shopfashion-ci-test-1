@@ -1,4 +1,4 @@
-import { ProductType } from "@api-contract/common";
+import { ProductType } from "~/api-contract/common";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { client } from "~/external/api-client/client";

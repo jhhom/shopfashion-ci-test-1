@@ -1,6 +1,7 @@
 import { loadStripe } from "@stripe/stripe-js";
-import { CONFIG } from "~/config/config";
+import { config } from "~/config/config";
+import { STRIPE_PUBLISHABLE_KEY } from "~/config/stripe-config";
 
-const stripePromise = loadStripe(CONFIG.STRIPE.PUBLISHABLE_KEY);
+const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 export { stripePromise };

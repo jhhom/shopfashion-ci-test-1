@@ -1,7 +1,7 @@
 import {
   ErrorHTTPResponse,
   zErrorHttpResponse,
-} from "@api-contract/errors/errors";
+} from "~/api-contract/errors/errors";
 
 export function parseApiError(error: unknown): ErrorHTTPResponse {
   const err = zErrorHttpResponse.safeParse(error);

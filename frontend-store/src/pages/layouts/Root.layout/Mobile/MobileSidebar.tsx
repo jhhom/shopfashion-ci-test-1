@@ -98,8 +98,8 @@ function Taxon(props: Taxon & { onTaxonNavigation: () => void }) {
                 <Link
                   className="block"
                   key={cc.id}
-                  to={"/products/*"}
-                  params={{ "*": cc.slug }}
+                  // @ts-expect-error
+                  to={`/products/${cc.slug}`}
                   onClick={props.onTaxonNavigation}
                 >
                   {cc.taxonName}

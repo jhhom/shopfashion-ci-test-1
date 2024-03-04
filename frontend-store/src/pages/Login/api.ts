@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import {
   StoreCustomersRequests,
   StoreProductsRequests,
-} from "@api-contract/store-api/api";
+} from "~/api-contract/store-api/api";
 import { client } from "~/external/api-client/client";
 import { useLocalStorageShoppingCart } from "~/external/browser/local-storage/use-shopping-cart.hook";
 import toast from "react-hot-toast";
@@ -12,7 +12,7 @@ import { useNavigate } from "@tanstack/react-router";
 import {
   ErrorHTTPResponse,
   zErrorHttpResponse,
-} from "@api-contract/errors/errors";
+} from "~/api-contract/errors/errors";
 import { parseApiError } from "~/utils/api-error";
 
 export function useLogin({
@@ -31,7 +31,7 @@ export function useLogin({
 
   return useMutation({
     mutationFn: async (
-      values: StoreProductsRequests["customerLogin"]["body"],
+      values: StoreProductsRequests["customerLogin"]["body"]
     ) => {
       const result = await client.products.customerLogin({ body: values });
       if (result.status !== 200) {

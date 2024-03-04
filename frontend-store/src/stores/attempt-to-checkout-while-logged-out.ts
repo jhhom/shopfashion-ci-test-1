@@ -1,4 +1,4 @@
-import { LinkPropsOptions } from "@tanstack/react-router";
+import { LinkProps } from "@tanstack/react-router";
 import { create } from "zustand";
 import { AuthSlice } from "~/stores/auth.store";
 import { ImmerStateCreator } from "~/stores/types";

@@ -42,12 +42,6 @@ export function AssociatedProducts(props: {
                     </div>
                     <div className="flex justify-between pt-2">
                       <p className="font-semibold">{p.name}</p>
-                      <p className="ml-8 flex font-semibold">
-                        <span className="self-start pt-1 text-xs">
-                          RM&nbsp;&nbsp;
-                        </span>{" "}
-                        {p.pricing}
-                      </p>
                     </div>
                   </Link>
                 </li>

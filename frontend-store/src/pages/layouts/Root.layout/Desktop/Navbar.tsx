@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { clsx as cx } from "clsx";
-import { Link, MakeLinkOptions, useNavigate } from "@tanstack/react-router";
+import { Link, LinkProps, useNavigate } from "@tanstack/react-router";
 import { Search } from "~/pages/layouts/Root.layout/components/Search";
 
 import {
@@ -17,19 +17,17 @@ export function Navbar(props: {
   const [showSearch, setShowSearch] = useState(false);
   const navigate = useNavigate();
 
-
-
   return (
     <div className="flex h-full w-full justify-between px-12">
       {showSearch ? (
-          <Search
-            showSearch={showSearch}
-            onSearch={(searchTerm: string) => {
-              navigate({ to: "/search", search: { search: searchTerm } });
-              setShowSearch(false);
-            }}
-            onCloseSearch={() => setShowSearch(false)}
-          />
+        <Search
+          showSearch={showSearch}
+          onSearch={(searchTerm: string) => {
+            navigate({ to: "/search", search: { search: searchTerm } });
+            setShowSearch(false);
+          }}
+          onCloseSearch={() => setShowSearch(false)}
+        />
       ) : (
         <>
           <div className="flex items-center">
@@ -60,10 +58,14 @@ export function Navbar(props: {
             <NavButton
               icon={<IconPerson className="h-[1.625rem] w-[1.625rem]" />}
               to="/member"
+              search={{}}
+              params={{}}
             />
             <NavButton
               icon={<IconShoppingCart className="h-[1.625rem] w-[1.625rem]" />}
               to="/cart"
+              search={{}}
+              params={{}}
             />
           </div>
         </>
@@ -112,7 +114,7 @@ function NavButton({
   ...props
 }: {
   icon: JSX.Element;
-} & MakeLinkOptions) {
+} & LinkProps) {
   return (
     <Link
       {...props}

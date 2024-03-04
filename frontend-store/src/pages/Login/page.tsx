@@ -1,15 +1,11 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UseFormRegisterReturn, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useMutation } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { IconClose, IconInfo } from "~/pages/common/Icons";
 import { clsx as cx } from "clsx";
-import { useLocalStorageAuth } from "~/external/browser/local-storage/use-auth.hook";
 import { useAppStore } from "~/stores/stores";
-import { attemptToCheckoutWhileLoggedOutStore } from "~/stores/attempt-to-checkout-while-logged-out";
 import { useLocalStorageShoppingCart } from "~/external/browser/local-storage/use-shopping-cart.hook";
 import { useLogin } from "~/pages/Login/api";
 import { parseApiError } from "~/utils/api-error";
@@ -153,7 +149,7 @@ function Login(props: {
           (v) => {
             props.onSubmit(v);
           },
-          (e) => {},
+          (e) => {}
         )}
       >
         <EmailInput
@@ -211,7 +207,7 @@ function EmailInput({
           "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 outline-none focus:border-blue-500",
           {
             "border-red-500": error !== undefined,
-          },
+          }
         )}
         {...registration}
       />
@@ -246,7 +242,7 @@ function PasswordInput({
           "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 outline-none focus:border-blue-500",
           {
             "border-red-500": error !== undefined,
-          },
+          }
         )}
         {...registration}
       />

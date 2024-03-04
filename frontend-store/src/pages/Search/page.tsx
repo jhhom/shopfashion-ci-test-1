@@ -5,7 +5,7 @@ import { ProductListingItem } from "~/pages/ProductListingByTaxon/page";
 import { useProductSearch } from "~/pages/Search/api";
 
 export function SearchPage() {
-  const search = useSearch({ from: "/e-commerce/search" });
+  const search = useSearch({ from: "/search" });
 
   const productListingQuery = useProductSearch(search.search);
 

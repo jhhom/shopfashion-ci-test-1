@@ -1,12 +1,8 @@
 import {
-  Outlet,
-  RouterProvider,
-  Link,
-  Router,
-  Route,
-  RootRoute,
-  redirect,
-  useParams,
+  NotFoundRoute,
+  createRootRoute,
+  createRoute,
+  createRouter,
 } from "@tanstack/react-router";
 import { z } from "zod";
 import { clsx as cx } from "clsx";
@@ -16,7 +12,10 @@ import { HomePage } from "~/pages/Home/page";
 
 import { RootLayout } from "~/pages/layouts/Root.layout/Root.layout";
 import { UserLoginRootLayout } from "~/pages/layouts/UserLogin.layout";
-import { ECommerceRootLayout } from "~/pages/layouts/ECommerce.layout";
+import {
+  AppRootLayout,
+  ECommerceRootLayout,
+} from "~/pages/layouts/ECommerce.layout";
 
 import { ProductListingByTaxonPage } from "~/pages/ProductListingByTaxon/page";
 import { ProductDetailsPage } from "~/pages/ProductDetails/page";
@@ -29,27 +28,13 @@ import { ThankYouPage } from "~/pages/ThankYou/page";
 import { ProfileSubpage } from "~/pages/Membership/Profile/page";
 import { PurchaseHistorySubpage } from "~/pages/Membership/PurchaseHistory/page";
 import { ProductReviewsPage } from "~/pages/ProductReviews/page";
-import { Page404Page } from "~/pages/Page404/page";
+import { Page404Page, Page404WithLayoutPage } from "~/pages/Page404/page";
 import { SearchPage } from "~/pages/Search/page";
 
-const rootRoute = new RootRoute({
-  component: RootLayout,
+const rootRoute = createRootRoute({
+  component: AppRootLayout,
+  notFoundComponent: Page404WithLayoutPage,
 });
-
-const rootRoutes = {
-  eCommerce: new Route({
-    id: "e-commerce",
-    getParentRoute: () => rootRoute,
-    path: "/",
-    component: ECommerceRootLayout,
-  }),
-  userLogin: new Route({
-    id: "user-login",
-    getParentRoute: () => rootRoute,
-    path: "/",
-    component: UserLoginRootLayout,
-  }),
-};
 
 const productListingFilterSchema = z.object({
   price_min: z.number().optional().catch(undefined),
@@ -65,81 +50,66 @@ type ProductListingFilter = z.infer<typeof productListingFilterSchema>;
 
 const routes = {
   site: {
-    index: new Route({
-      id: "home",
-      getParentRoute: () => rootRoutes.eCommerce,
+    home: createRoute({
+      getParentRoute: () => rootRoute,
       path: "/",
       component: HomePage,
     }),
-    productListingByTaxon: new Route({
-      getParentRoute: () => rootRoutes.eCommerce,
-      path: "/products/*",
-      component: ProductListingByTaxonPage,
-      validateSearch: (
-        search: Record<string, unknown>,
-      ): ProductListingFilter => {
-        return productListingFilterSchema.parse(search);
-      },
+    productReviews: createRoute({
+      getParentRoute: () => rootRoute,
+      path: "/product/$productId/reviews",
+      component: ProductReviewsPage,
     }),
-    productDetails: new Route({
-      getParentRoute: () => rootRoutes.eCommerce,
+    productDetails: createRoute({
+      getParentRoute: () => rootRoute,
       path: "/product/$productId",
       component: ProductDetailsPage,
       validateSearch: (search: Record<string, unknown>) => {
         return productDetailsSearchSchema.parse(search);
       },
     }),
-    productReviews: new Route({
-      getParentRoute: () => rootRoutes.eCommerce,
-      path: "/product/$productId/reviews",
-      component: ProductReviewsPage,
+    productListingByTaxon: createRoute({
+      getParentRoute: () => rootRoute,
+      path: "/products/*",
+      component: ProductListingByTaxonPage,
+      validateSearch: (
+        search: Record<string, unknown>
+      ): ProductListingFilter => {
+        return productListingFilterSchema.parse(search);
+      },
     }),
-    search: new Route({
-      getParentRoute: () => rootRoutes.eCommerce,
+    search: createRoute({
+      getParentRoute: () => rootRoute,
       path: "/search",
       component: SearchPage,
       validateSearch: (search: Record<string, unknown>): ProductSearch => {
         return productSearchSchema.parse(search);
       },
     }),
-    shoppingCart: new Route({
-      getParentRoute: () => rootRoutes.eCommerce,
+    shoppingCart: createRoute({
+      getParentRoute: () => rootRoute,
       path: "/cart",
       component: ShoppingCartPage,
     }),
-    membership: new Route({
-      getParentRoute: () => rootRoutes.eCommerce,
+    membership: createRoute({
+      getParentRoute: () => rootRoute,
       path: "/member",
       component: MembershipPage,
-      beforeLoad: async () => {
-        /*
-        const isAuthenticated = useAppStore.getState().authenticated;
-
-        // alert("MEMBER???: " + isAuthenticated);
-        useAppStore.setState({ navigateTo: "/member" });
-
-        if (!isAuthenticated) {
-          throw redirect({
-            to: "/login",
-          });
-        }
-        */
-      },
     }),
-    checkout: new Route({
-      getParentRoute: () => rootRoutes.eCommerce,
+    checkout: createRoute({
+      getParentRoute: () => rootRoute,
       path: "/checkout",
       component: CheckoutPage,
     }),
-    thankyou: new Route({
-      getParentRoute: () => rootRoutes.eCommerce,
+    thankyou: createRoute({
+      getParentRoute: () => rootRoute,
       path: "/thank-you",
       component: ThankYouPage,
     }),
   },
   userLogin: {
-    login: new Route({
-      getParentRoute: () => rootRoutes.userLogin,
+    login: createRoute({
+      getParentRoute: () => rootRoute,
       path: "/login",
       component: LoginPage,
       beforeLoad: async () => {
@@ -154,8 +124,8 @@ const routes = {
         */
       },
     }),
-    register: new Route({
-      getParentRoute: () => rootRoutes.userLogin,
+    register: createRoute({
+      getParentRoute: () => rootRoute,
       path: "/register",
       component: RegistrationPage,
       beforeLoad: async () => {
@@ -187,26 +157,26 @@ const purchaseHistoryFilterSchema = z.object({
 type PurchaseHistoryFilter = z.infer<typeof purchaseHistoryFilterSchema>;
 
 export const membershipSubroutes = {
-  profile: new Route({
+  profile: createRoute({
     getParentRoute: () => routes.site.membership,
     path: "/",
     component: ProfileSubpage,
   }),
-  purchaseHistory: new Route({
+  purchaseHistory: createRoute({
     getParentRoute: () => routes.site.membership,
     path: "/purchases",
     component: PurchaseHistorySubpage,
     validateSearch: (
-      search: Record<string, unknown>,
+      search: Record<string, unknown>
     ): PurchaseHistoryFilter => {
       return purchaseHistoryFilterSchema.parse(search);
     },
   }),
 };
 
-export const catchAllRoute = new Route({
+export const catchAllRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/*",
+  path: "*",
   component: Page404Page,
   beforeLoad: async () => {
     const isAuthenticated = useAppStore.getState().authenticated;
@@ -222,28 +192,24 @@ export const catchAllRoute = new Route({
 
 // Create the route tree using your routes
 export const routeTree = rootRoute.addChildren([
-  rootRoutes.userLogin.addChildren([
-    routes.userLogin.login,
-    routes.userLogin.register,
+  routes.site.home,
+  routes.site.productReviews,
+  routes.site.productListingByTaxon,
+  routes.site.productDetails,
+  routes.site.shoppingCart,
+  routes.site.search,
+  routes.site.membership.addChildren([
+    membershipSubroutes.profile,
+    membershipSubroutes.purchaseHistory,
   ]),
-  rootRoutes.eCommerce.addChildren([
-    routes.site.index,
-    routes.site.productReviews,
-    routes.site.productListingByTaxon,
-    routes.site.productDetails,
-    routes.site.shoppingCart,
-    routes.site.search,
-    routes.site.membership.addChildren([
-      membershipSubroutes.profile,
-      membershipSubroutes.purchaseHistory,
-    ]),
-    routes.site.checkout,
-    routes.site.thankyou,
-  ]),
+  routes.site.checkout,
+  routes.site.thankyou,
+  routes.userLogin.login,
+  routes.userLogin.register,
   catchAllRoute,
 ]);
 
-export const router = new Router({ routeTree });
+export const router = createRouter({ routeTree });
 
 // Register your router for maximum type safety
 declare module "@tanstack/react-router" {

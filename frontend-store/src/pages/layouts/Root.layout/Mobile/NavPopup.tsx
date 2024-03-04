@@ -1,7 +1,7 @@
 import { P, match } from "ts-pattern";
 import { Popover } from "@headlessui/react";
 import { Link } from "@tanstack/react-router";
-import type { Taxon } from "@api-contract/common";
+import type { Taxon } from "~/api-contract/common";
 
 type Navigation = {
   category: string;

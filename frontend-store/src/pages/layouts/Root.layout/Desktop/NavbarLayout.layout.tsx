@@ -1,5 +1,5 @@
 import { Toaster } from "react-hot-toast";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useClickAway } from "@uidotdev/usehooks";
 
 import { Navbar } from "~/pages/layouts/Root.layout/Desktop/Navbar";
@@ -8,10 +8,14 @@ import { NavPopup } from "~/pages/layouts/Root.layout/Desktop/NavPopup";
 import { useHover } from "@uidotdev/usehooks";
 
 import { clsx as cx } from "clsx";
-import { Outlet } from "@tanstack/react-router";
+import { Outlet, useRouter } from "@tanstack/react-router";
 import { Taxon } from "~/pages/layouts/Root.layout/types";
+import { HomePage } from "~/pages/Home/page";
 
-export function NavbarLayout({ taxonTree }: { taxonTree: Taxon[] }) {
+export function NavbarLayout({
+  taxonTree,
+  children,
+}: React.PropsWithChildren<{ taxonTree: Taxon[] }>) {
   const [openNav, setOpenNav] = useState<
     | { open: false }
     | {
@@ -26,6 +30,8 @@ export function NavbarLayout({ taxonTree }: { taxonTree: Taxon[] }) {
 
   const [navPopupHoverRef, isHoveringNavPopup] = useHover<HTMLDivElement>();
   const [navbarHoverRef, isHoveringNavbar] = useHover<HTMLDivElement>();
+  const pathname = useRouter().state.location.href;
+  const p = window.location.href;
 
   useEffect(() => {
     if (!isHoveringNavPopup && !isHoveringNavbar) {
@@ -51,7 +57,7 @@ export function NavbarLayout({ taxonTree }: { taxonTree: Taxon[] }) {
         ref={navPopupRef}
         className={cx(
           "absolute top-16 z-10 h-64 w-full border-b border-gray-300 bg-white",
-          { hidden: !openNav.open },
+          { hidden: !openNav.open }
         )}
       >
         {openNav.open && (
@@ -67,7 +73,7 @@ export function NavbarLayout({ taxonTree }: { taxonTree: Taxon[] }) {
       </div>
 
       <div id="outlet-container" className="min-h-[calc(100vh-12rem-4rem)]">
-        <Outlet />
+        {children}
       </div>
       <Footer />
     </div>
@@ -91,8 +97,8 @@ function Footer() {
         <p className="mt-4">
           If you're interested, check out my other portfolio projects at{" "}
           <FooterLink
-            href="https://github.com/jhdev22"
-            text="GitHub: jhdev22"
+            href="https://github.com/jhhom"
+            text="GitHub: jhhom"
           ></FooterLink>
         </p>
 
@@ -106,7 +112,7 @@ function Footer() {
           <FooterLink href="https://sylius.com/" text="Behance" /> and websites
           like <FooterLink href="https://sylius.com/" text="Shopee" /> and{" "}
           <FooterLink href="https://sylius.com/" text="Amazon" />. All photos
-          (unless I left out any) for the sample products are taken from{" "}
+          for the sample products are taken from{" "}
           <FooterLink href="https://unsplash.com/" text="Unsplash" />.
         </p>
 
@@ -120,7 +126,11 @@ function Footer() {
 
 export function FooterLink(props: { href: string; text: string }) {
   return (
-    <a className="text-blue-300 hover:underline" href={props.href}>
+    <a
+      target="_blank"
+      className="text-blue-300 hover:underline"
+      href={props.href}
+    >
       {props.text}
     </a>
   );

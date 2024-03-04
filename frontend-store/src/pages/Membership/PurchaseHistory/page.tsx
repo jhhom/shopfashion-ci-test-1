@@ -4,12 +4,7 @@ import { useAppStore } from "~/stores/stores";
 
 import { QUERY_KEY } from "~/pages/Membership/query";
 import { client } from "~/external/api-client/client";
-import {
-  Link,
-  MakeLinkOptions,
-  Outlet,
-  useSearch,
-} from "@tanstack/react-router";
+import { Link, LinkProps, Outlet, useSearch } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { clsx as cx } from "clsx";
 import { Fragment, useState } from "react";
@@ -23,10 +18,7 @@ import { parseApiError } from "~/utils/api-error";
 import { match } from "ts-pattern";
 import toast from "react-hot-toast";
 import { formatPrice } from "~/utils/utils";
-import {
-  useCreateProductReview,
-  usePurchases,
-} from "~/pages/Membership/api";
+import { useCreateProductReview, usePurchases } from "~/pages/Membership/api";
 
 export function PurchaseHistorySubpage() {
   const [openReviewProductDialog, setOpenReviewProductDialog] = useState({
@@ -37,7 +29,7 @@ export function PurchaseHistorySubpage() {
     isConfigurableProduct: false,
   });
 
-  const searchParams = useSearch({ from: "/e-commerce/member/purchases" });
+  const searchParams = useSearch({ from: "/member/purchases" });
 
   const purchasesQuery = usePurchases(searchParams.status);
   const createProductReviewMutation = useCreateProductReview();
@@ -163,25 +155,28 @@ function Tabs({
     <nav
       className={cx(
         "isolate flex divide-x divide-gray-200 rounded-t-lg border border-gray-300",
-        className,
+        className
       )}
       aria-label="Tabs"
     >
       <TabButton
         search={{ status: "TO_RECEIVE" }}
         isActive={status === "TO_RECEIVE"}
+        params={{}}
       >
         to receive
       </TabButton>
       <TabButton
         search={{ status: "COMPLETED" }}
         isActive={status === "COMPLETED"}
+        params={{}}
       >
         completed
       </TabButton>
       <TabButton
         search={{ status: "CANCELLED" }}
         isActive={status === "CANCELLED"}
+        params={{}}
       >
         cancelled
       </TabButton>
@@ -194,7 +189,7 @@ function TabButton({
   className,
   isActive,
   ...props
-}: MakeLinkOptions & {
+}: LinkProps & {
   isActive: boolean;
 }) {
   return (
@@ -202,7 +197,7 @@ function TabButton({
       {...props}
       className={cx(
         "group relative min-w-0 flex-1 overflow-hidden px-4 py-4 text-center text-sm font-medium capitalize first:rounded-tl-lg last:rounded-tr-lg focus:z-10",
-        className,
+        className
       )}
       inactiveProps={{
         className: "bg-white hover:bg-gray-50 ",

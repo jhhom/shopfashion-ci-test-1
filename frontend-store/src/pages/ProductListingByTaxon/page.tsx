@@ -23,7 +23,7 @@ import {
 } from "~/pages/common/ErrorContents";
 import { IconClose, IconShirt, IconSliders } from "~/pages/common/Icons";
 import { Rating } from "~/pages/common/Rating";
-import { Breadcrumb, breadcrumb } from "~/pages/common/components/Breadcrumb";
+import { Breadcrumb } from "~/pages/common/components/Breadcrumb";
 import { parseApiError } from "~/utils/api-error";
 
 import { formatPrice } from "~/utils/utils";
@@ -39,14 +39,14 @@ const prices = [
 
 export function ProductListingByTaxonPage() {
   const taxonSlug = (
-    useParams({ from: "/e-commerce/products/*" }) as {
+    useParams({ from: "/products/*" }) as {
       "*": string;
     }
   )["*"];
 
   const [openSidebar, setOpenSidebar] = useState(false);
 
-  const search = useSearch({ from: "/e-commerce/products/*" });
+  const search = useSearch({ from: "/products/*" });
   const searchSortPrice = search.sort_price ? search.sort_price : "asc";
 
   const navigate = useNavigate();
@@ -88,12 +88,7 @@ export function ProductListingByTaxonPage() {
             ? breadcrumbsQuery.data.precedingSlugs.map((c) => ({
                 id: c.id,
                 name: c.name,
-                link: {
-                  to: "/products/*",
-                  params: {
-                    "*": c.slug,
-                  },
-                },
+                link: `/products/${c.slug}`,
               }))
             : []
         }
@@ -101,7 +96,9 @@ export function ProductListingByTaxonPage() {
       />
 
       <div className="hidden py-4 md:block">
-        <p className="text-xl font-medium">T-Shirts</p>
+        <p className="text-xl font-medium">
+          {breadcrumbsQuery.data?.lastSlug?.name ?? ""}
+        </p>
       </div>
 
       <div className="md:flex md:pb-16">
@@ -111,8 +108,8 @@ export function ProductListingByTaxonPage() {
             className="mt-8"
             onSubmit={(v) => {
               navigate({
-                to: "/products/*",
-                params: { "*": taxonSlug },
+                // @ts-ignore
+                to: `/products/${taxonSlug}`,
                 search: {
                   ...search,
                   price_min: v.min,
@@ -134,10 +131,8 @@ export function ProductListingByTaxonPage() {
                 order={searchSortPrice}
                 onSetOrder={(order) => {
                   navigate({
-                    to: "/products/*",
-                    params: {
-                      "*": taxonSlug,
-                    },
+                    // @ts-ignore
+                    to: `/products/${taxonSlug}`,
                     search: {
                       ...search,
                       sort_price: order,
@@ -182,8 +177,8 @@ export function ProductListingByTaxonPage() {
         }}
         onPriceRangeSubmit={(v) => {
           navigate({
-            to: "/products/*",
-            params: { "*": taxonSlug },
+            // @ts-expect-error
+            to: `/products/${taxonSlug}`,
             search: {
               ...search,
               price_min: v.min,

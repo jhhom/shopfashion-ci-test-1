@@ -12,8 +12,8 @@ import { parseApiError } from "~/utils/api-error";
 export function ProductReviewsPage() {
   const productId = Number.parseInt(
     useParams({
-      from: "/e-commerce/product/$productId/reviews",
-    }).productId,
+      from: "/product/$productId/reviews",
+    }).productId
   );
 
   const reviewsQuery = useProductReviews(productId);

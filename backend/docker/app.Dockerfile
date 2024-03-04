@@ -17,7 +17,6 @@ RUN apk add --update nano
 RUN apk add openjdk21
 RUN apk add --no-cache postgresql-client
 
-
 WORKDIR /app
 COPY --from=install /app/target/app.jar ./app.jar
 COPY ./scripts ./scripts

@@ -89,7 +89,7 @@ export default defineConfig({
       stderr: "pipe",
     },
     {
-      command: "cd ../frontend-store-2 && pnpm run dev",
+      command: "cd ../frontend-store && pnpm run dev",
       url: "http://localhost:9802",
       reuseExistingServer: !process.env.CI,
       stdout: "pipe",

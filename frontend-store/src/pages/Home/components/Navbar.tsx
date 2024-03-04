@@ -7,7 +7,7 @@ import {
   IconClose,
 } from "~/pages/common/Icons";
 import { clsx as cx } from "clsx";
-import { Link, LinkPropsOptions, LinkOptions } from "@tanstack/react-router";
+import { Link, LinkProps, LinkOptions } from "@tanstack/react-router";
 import { useAppStore } from "~/stores/stores";
 
 export function Navbar(props: {
@@ -75,15 +75,17 @@ function NavButton(props: {
   icon: JSX.Element;
   className?: string;
   onClick?: () => void;
-  href?: LinkPropsOptions["to"];
+  href?: LinkProps["to"];
 }) {
   return (
     <Link
       to={props.href}
+      search={{}}
+      params={{}}
       onClick={props.onClick}
       className={cx(
         "flex h-9 w-9 items-center justify-center",
-        props.className,
+        props.className
       )}
     >
       {props.icon}

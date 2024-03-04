@@ -1,10 +1,10 @@
-import { Link, MakeLinkOptions } from "@tanstack/react-router";
+import { Link, LinkProps } from "@tanstack/react-router";
 import { clsx as cx } from "clsx";
 
 export type Crumb = {
   id: number;
   name: string;
-  link: MakeLinkOptions;
+  link: string;
 };
 
 export function Breadcrumb(props: {
@@ -19,9 +19,9 @@ export function Breadcrumb(props: {
         <div className="flex items-center" key={c.id}>
           {c.link ? (
             <Link
-              {...c.link}
+              to={c.link}
               className={cx(
-                "cursor-pointer rounded-md px-1 py-0.5 hover:bg-gray-100",
+                "cursor-pointer rounded-md px-1 py-0.5 hover:bg-gray-100"
               )}
             >
               {c.name}
@@ -49,9 +49,3 @@ export function Breadcrumb(props: {
     </div>
   );
 }
-
-export const breadcrumb: Crumb[] = [
-  { id: 1, name: "Men", link: { to: "/" } },
-  { id: 2, name: "Tops", link: { to: "/" } },
-  { id: 3, name: "T-Shirts", link: { to: "/" } },
-];

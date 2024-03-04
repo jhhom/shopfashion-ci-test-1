@@ -1,4 +1,4 @@
-import { StoreProductsResponse } from "@api-contract/store-api/api";
+import { StoreProductsResponse } from "~/api-contract/store-api/api";
 import { match } from "ts-pattern";
 import { IconCheck, IconShirt } from "~/pages/common/Icons";
 import { useEffect, useMemo, useState } from "react";
@@ -8,7 +8,7 @@ import { Rating } from "~/pages/common/Rating";
 import { clsx as cx } from "clsx";
 import { useMap, Actions } from "usehooks-ts";
 import { getDisabledOptions2 } from "~/pages/ProductDetails/components/get-disabled-options/get-disabled-options-3";
-import { ProductStatus } from "@api-contract/common";
+import { ProductStatus } from "~/api-contract/common";
 
 type Product = StoreProductsResponse["getOneProduct"]["body"];
 
@@ -144,13 +144,11 @@ function ConfigurableProductDetails({
         product.productOptions.map((o) => [
           o.code,
           new Set(o.values.map((v) => v.id)),
-        ]),
+        ]) as [string, Set<number>][]
       ),
       variants: product.variants.map(
         (v) =>
-          new Map(
-            v.optionValues.map((ov) => [ov.optionCode, ov.optionValueId]),
-          ),
+          new Map(v.optionValues.map((ov) => [ov.optionCode, ov.optionValueId]))
       ),
     });
   }, [productOptions, product.productOptions, product.variants]);
@@ -158,7 +156,7 @@ function ConfigurableProductDetails({
   const matchingVariant = product.variants.find((variant) => {
     return mapsAreEqual(
       new Map(variant.optionValues.map((v) => [v.optionCode, v.optionValueId])),
-      productOptions,
+      productOptions
     );
   });
 
@@ -313,7 +311,7 @@ function OptionButton({
         {
           "border border-teal-600 text-teal-600": active && !disabled,
           "border border-gray-300": !active || disabled,
-        },
+        }
       )}
     >
       {text}
@@ -332,7 +330,7 @@ function OptionButton({
 
 function mapsAreEqual<K, V>(
   m1: Map<K, V>,
-  m2: Omit<Map<K, V>, "set" | "clear" | "delete">,
+  m2: Omit<Map<K, V>, "set" | "clear" | "delete">
 ) {
   return (
     m1.size === m2.size &&
