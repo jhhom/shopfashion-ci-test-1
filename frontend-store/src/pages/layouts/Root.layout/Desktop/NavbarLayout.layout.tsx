@@ -82,11 +82,12 @@ export function NavbarLayout({
 
 function Footer() {
   return (
-    <div className="bg-gray-700 px-12 pb-12 pt-8 text-white">
+    <div className="bg-gray-700 px-12 pb-28 pt-8 text-white">
       <p className="block font-logo text-3xl font-medium underline decoration-teal-500 decoration-2">
         shopfashion
       </p>
 
+      {/*
       <div className="mt-6 max-w-[640px]">
         <p>
           shopfashion is a fashion e-commerce website developed by Joo Hom as a
@@ -120,6 +121,7 @@ function Footer() {
           shopfashion brand is a brand that I made up myself.
         </p>
       </div>
+    */}
     </div>
   );
 }

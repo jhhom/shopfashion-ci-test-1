@@ -72,3 +72,6 @@ backend/static/**/*
 backend/docker/docker-volumes/assets/**/*
 backend/docker/docker-volumes/db/**/*
 !backend/docker/docker-volumes/.gitkeep
+
+frontend-store/src/config/config.ts
+frontend-admin/src/config/config.ts

@@ -6,6 +6,7 @@ import { IconInfo } from "~/pages/common/Icons";
 import { Form } from "~/pages/common/components/Form/Form";
 import { InputField } from "~/pages/common/components/Form/InputField";
 import { useUser } from "~/providers/user";
+import { config } from "~/config/config";
 
 const formSchema = z.object({
   email: z.string().min(1, "Email is required"),
