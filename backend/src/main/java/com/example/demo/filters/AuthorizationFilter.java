@@ -44,22 +44,21 @@ public class AuthorizationFilter extends OncePerRequestFilter {
       String token = authHeader.substring(7);
 
       Optional<JwtService.DTO.User> user = jwtService.getUserFromToken(token);
-      if (user.isEmpty()) {
-        throw new AuthUnauthorizedException();
-      }
 
       List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-      if (user.get().userRole() == UserRole.ADMIN) {
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + UserRole.ADMIN.name()));
-      } else if (user.get().userRole() == UserRole.CUSTOMER) {
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + UserRole.CUSTOMER.name()));
+      if (!user.isEmpty()) {
+        if (user.get().userRole() == UserRole.ADMIN) {
+          authorities.add(new SimpleGrantedAuthority("ROLE_" + UserRole.ADMIN.name()));
+        } else if (user.get().userRole() == UserRole.CUSTOMER) {
+          authorities.add(new SimpleGrantedAuthority("ROLE_" + UserRole.CUSTOMER.name()));
+        }
+
+        UsernamePasswordAuthenticationToken principalToken =
+            new UsernamePasswordAuthenticationToken(user.get(), null, authorities);
+
+        SecurityContextHolder.getContext().setAuthentication(principalToken);
       }
-
-      UsernamePasswordAuthenticationToken principalToken =
-          new UsernamePasswordAuthenticationToken(user.get(), null, authorities);
-
-      SecurityContextHolder.getContext().setAuthentication(principalToken);
 
       filterChain.doFilter(request, response);
     }

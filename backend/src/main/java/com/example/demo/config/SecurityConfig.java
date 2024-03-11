@@ -35,12 +35,6 @@ public class SecurityConfig {
             add("*");
           }
         });
-    config.setAllowedOrigins(
-        new ArrayList<>() {
-          {
-            add("*");
-          }
-        });
 
     return http.cors(x -> x.configurationSource(req -> config))
         .csrf(x -> x.disable())
