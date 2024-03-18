@@ -87,40 +87,6 @@ function Footer() {
       <p className="block font-logo text-3xl font-medium underline decoration-teal-500 decoration-2">
         shopfashion
       </p>
-
-      <div className="mt-6">
-        <p>
-          shopfashion is a fashion e-commerce website developed by Joo Hom as a
-          portfolio project using ReactJS, TypeScript, Tailwind CSS, and Java
-          Spring.
-        </p>
-
-        <p className="mt-4">
-          If you're interested, check out my other portfolio projects at{" "}
-          <FooterLink
-            href="https://github.com/jhhom"
-            text="GitHub: jhhom"
-          ></FooterLink>
-        </p>
-
-        <p className="mt-4">
-          Inspiration for the project is taken from the awesome{" "}
-          <FooterLink
-            href="https://sylius.com/"
-            text="Sylius e-commerce platform"
-          />
-          . Some UI inspiration is also taken by referring various works on{" "}
-          <FooterLink href="https://sylius.com/" text="Behance" /> and websites
-          like <FooterLink href="https://sylius.com/" text="Shopee" /> and{" "}
-          <FooterLink href="https://sylius.com/" text="Amazon" />. All photos
-          for the sample products are taken from{" "}
-          <FooterLink href="https://unsplash.com/" text="Unsplash" />.
-        </p>
-
-        <p className="mt-4">
-          shopfashion brand is a brand that I made up myself.
-        </p>
-      </div>
     </div>
   );
 }
