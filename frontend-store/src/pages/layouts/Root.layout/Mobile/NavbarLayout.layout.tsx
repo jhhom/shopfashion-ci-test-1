@@ -25,7 +25,7 @@ export function NavbarLayout({
   return (
     <div>
       <Navbar onOpenSidebar={() => setOpenMobileSidebar(true)} />
-      <div className="min-h-[calc(100vh-4rem-8rem)] pt-16">{children}</div>
+      <div className="min-h-[calc(100vh-4rem-196px)] pt-16">{children}</div>
       <Footer />
       <NavigationButtons />
       <MobileSidebar

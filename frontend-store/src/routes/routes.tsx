@@ -1,21 +1,14 @@
 import {
-  NotFoundRoute,
   createRootRoute,
   createRoute,
   createRouter,
 } from "@tanstack/react-router";
 import { z } from "zod";
-import { clsx as cx } from "clsx";
 
 import { useAppStore } from "~/stores/stores";
 import { HomePage } from "~/pages/Home/page";
 
-import { RootLayout } from "~/pages/layouts/Root.layout/Root.layout";
-import { UserLoginRootLayout } from "~/pages/layouts/UserLogin.layout";
-import {
-  AppRootLayout,
-  ECommerceRootLayout,
-} from "~/pages/layouts/ECommerce.layout";
+import { AppRootLayout } from "~/pages/layouts/ECommerce.layout";
 
 import { ProductListingByTaxonPage } from "~/pages/ProductListingByTaxon/page";
 import { ProductDetailsPage } from "~/pages/ProductDetails/page";

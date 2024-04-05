@@ -72,7 +72,7 @@ export function NavbarLayout({
         )}
       </div>
 
-      <div id="outlet-container" className="min-h-[calc(100vh-12rem-4rem)]">
+      <div id="outlet-container" className="min-h-[calc(100vh-180px-4rem)]">
         {children}
       </div>
       <Footer />
