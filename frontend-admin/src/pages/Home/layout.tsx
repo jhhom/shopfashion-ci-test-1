@@ -22,7 +22,7 @@ import { useAfterVerifyTokenNavigation } from "~/providers/after-verify-token-na
 import { DashboardPage } from "~/pages/Home/Dashboard/page";
 
 export function HomePage() {
-  const [openSidebar, setOpenSidebar] = useState(false);
+  const [openSidebar, setOpenSidebar] = useState(true);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
