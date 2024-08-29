@@ -5,7 +5,7 @@ export default defineConfig({
   test: {
     // ...
     environment: "jsdom",
-    reporters: ["default"],
+    reporters: ["github-actions"],
   },
   resolve: {
     alias: {
