@@ -8,7 +8,7 @@ export default defineConfig({
     // ...
     environment: "jsdom",
     reporters: process.env.GITHUB_ACTIONS
-      ? new GithubActionsReporter()
+      ? [new GithubActionsReporter()]
       : ["default"],
   },
   resolve: {
