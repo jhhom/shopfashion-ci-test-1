@@ -17,9 +17,8 @@ jobs:
         with:
           version: 9
 
-      - run: pwd
-      - run: ls
-      - run: cd ./frontend-store
-      - run: ls
-      - run: pnpm install
-      - run: pnpm test
+      - name: run test
+        working-directory: ./frontend-store
+        run: |
+          pnpm install
+          pnpm test
