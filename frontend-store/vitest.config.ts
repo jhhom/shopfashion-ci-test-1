@@ -5,9 +5,7 @@ export default defineConfig({
   test: {
     // ...
     environment: "jsdom",
-    reporters: process.env.GITHUB_ACTIONS
-      ? ["github-actions", "verbose"]
-      : ["default"],
+    reporters: ["default"],
   },
   resolve: {
     alias: {
