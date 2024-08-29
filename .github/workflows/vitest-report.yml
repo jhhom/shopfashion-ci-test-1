@@ -21,4 +21,4 @@ jobs:
         working-directory: ./frontend-store
         run: |
           pnpm install
-          pnpm test
+          pnpm test:github-actions

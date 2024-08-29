@@ -11,7 +11,7 @@
     "build:production": "tsc && VITE_APP_ENV=production vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest"
+    "test:github-actions": "ENV=GITHUB_ACTIONS vitest"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
