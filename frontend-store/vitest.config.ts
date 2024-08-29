@@ -1,15 +1,11 @@
 import path from "path";
 import { defineConfig } from "vitest/config";
 
-import GithubActionsReporter from "vitest-github-actions-reporter";
-
 export default defineConfig({
   test: {
     // ...
     environment: "jsdom",
-    reporters: process.env.GITHUB_ACTIONS
-      ? [new GithubActionsReporter()]
-      : ["default"],
+    reporters: process.env.GITHUB_ACTIONS ? ["github-actions"] : ["default"],
   },
   resolve: {
     alias: {
