@@ -1,4 +1,4 @@
-import { test } from "vitest";
+import { test, expect } from "vitest";
 import { paginationToItems } from "~/pages/common/components/Table/TablePagination/pagination-utils";
 import type { OutputItem } from "~/pages/common/components/Table/TablePagination/pagination-utils";
 
@@ -20,6 +20,8 @@ test("pagination test", () => {
     totalItems: 9,
   });
   console.log(results);
+
+  expect(2).toBe(3);
 });
 
 const testSets: {
