@@ -7,7 +7,7 @@ export default defineConfig({
     reporters: process.env.GITHUB_ACTIONS
       ? ["html", "github-actions", "verbose"]
       : ["verbose"],
-    outputFile: "./test-output/test-output.html",
+    outputFile: "./test-output/index.html",
   },
   resolve: {
     alias: {
