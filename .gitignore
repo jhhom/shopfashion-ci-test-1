@@ -75,3 +75,4 @@ backend/docker/docker-volumes/db/**/*
 
 frontend-store/src/config/config.ts
 frontend-admin/src/config/config.ts
+frontend-admin/test-output
