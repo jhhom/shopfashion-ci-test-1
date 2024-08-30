@@ -4,6 +4,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   test: {
     // ...
+    // TODO: it looks like using environment 'jsdom' will cause GitHub annotation messages to not appear
     environment: "jsdom",
     reporters: process.env.GITHUB_ACTIONS ? ["github-actions"] : ["default"],
   },

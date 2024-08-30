@@ -18,7 +18,7 @@ jobs:
           version: 9
 
       - name: run test
-        working-directory: ./frontend-store
+        working-directory: ./frontend-admin
         run: |
           pnpm install
           pnpm test:github-actions
