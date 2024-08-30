@@ -8,6 +8,7 @@
     "dev": "vite",
     "dev:production": "VITE_APP_ENV=production vite",
     "test": "vitest",
+    "test:github-actions": "GITHUB_ACTIONS=true vitest",
     "build": "tsc && vite build",
     "build:production": "tsc && VITE_APP_ENV=production vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
